@@ -1,0 +1,913 @@
+
+<?xml version="1.0"?>
+<!--
+
+    Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License v. 2.0, which is available at
+    http://www.eclipse.org/legal/epl-2.0.
+
+    This Source Code may also be made available under the following Secondary
+    Licenses when the conditions for such availability set forth in the
+    Eclipse Public License v. 2.0 are satisfied: GNU General Public License,
+    version 2 with the GNU Classpath Exception, which is available at
+    https://www.gnu.org/software/classpath/license.html.
+
+    SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+
+-->
+
+<!-- ************ JAX-RPC build file ************************************** -->
+
+<project name="JAX-RPC-RI" default="main" basedir=".">
+
+  <property name="Name" value="JAX-RPC RI"/>
+  <property name="name" value="jaxrpc-ri"/>
+  <property name="pkg.version" value="1.1.4_01"/>
+  <property name="rpm.version" value="1.1.4"/>
+  <property name="version" value="${pkg.version}-INTERNAL"/>
+  <property name="rpm.release" value="1"/>
+  <property name="zip.release" value="1"/>
+
+<!-- ************ Per user local properties ******************************* -->
+
+  <property file="${user.home}/build.properties"/>   <!-- User local        -->
+  <property file="build.properties"/>                <!-- Component local   -->
+  <property file="../build.properties"/>             <!-- Commons local     -->
+
+
+<!-- ************ Where are we building into? ***************************** -->
+
+  <!-- The base directory for compilation targets -->
+  <property name="build.home" value="${basedir}/build"/>
+
+  <!-- The base directory for samples -->
+  <property name="samples.home"            value="${basedir}/samples"/>
+
+  <!-- The base directory for the JAX-RPC APIs -->
+  <property name="jaxrpc.api.home" value ="../jaxrpc-api/"/>
+
+  <!-- The base directory for distribution targets -->
+  <property name="dist.home" value="${basedir}/dist"/>
+
+  <!-- Placeholder for the wspack destination directory  -->
+  <property name="wspack.home" value="${basedir}/dist-wspack"/>
+
+  <!-- The base directory for component sources -->
+  <property name="source.home" value="${basedir}/src"/>
+
+  <!-- The base directory for dependent jars -->
+  <property name="lib.home" value="${basedir}/lib"/>
+
+  <!-- The base directory for docs -->
+  <property name="docs.home" value="${basedir}/docs"/>
+
+  <!-- The base directory for executable scripts -->
+  <property name="bin.home" value="${basedir}/etc/bin"/>
+
+  <!-- The base directory for wspack specific items -->
+  <property name="wspack.custom.home" value="${basedir}"/>
+
+  <!-- The base directory for unit test sources -->
+  <property name="test.home" value="${basedir}/test/src"/>
+
+  <!-- The base directory for benchmark sources -->
+  <property name="benchmark.home" value="${basedir}/test-benchmark/src"/>
+
+  <!-- The home directory for Ant -->
+  <property name="ant.home" value="${basedir}/lib"/>
+
+  <!-- The package product name -->
+  <property name="pkg.prod.name"    value="Sun Java(TM) Enterprise System"/>
+
+  <!-- The package product version -->
+  <property name="pkg.prod.version"    value="3.0"/>
+
+  <!-- The package build directory -->
+  <property name="pkg.build.dir"    value="${build.home}/pkg"/>
+
+  <!-- The package distribution directory -->
+  <property name="pkg.release.dir"    value="${basedir}/pkg-dist"/>
+
+  <!-- The rpm build directory -->
+  <property name="rpm.build.dir"    value="${build.home}/rpm/JAXRPC"/>
+
+  <!-- The rpm distribution directory -->
+  <property name="rpm.release.dir"    value="${basedir}/rpm-dist"/>
+
+  <!-- The zip build directory -->
+  <property name="zip.build.dir"    value="${build.home}/zip"/>
+
+  <!-- The zip distribution directory -->
+  <property name="zip.release.dir"    value="${basedir}/zip-dist"/>
+
+  <!-- The maven distribution directory -->
+  <property name="maven.dist.dir"    value="${build.home}/maven-distribution"/>
+
+<!-- ************ Dependencies **** *************************************** -->
+  <!-- The locations of necessary jar files -->
+  <property name="javamail.jar" value="${lib.home}/mail.jar"/>
+  <property name="jaf.jar" value="${lib.home}/activation.jar"/>
+  <property name="servlet.jar" value="${lib.home}/servlet.jar"/>
+  <property name="junit.jar" value="${lib.home}/junit.jar"/>
+  <property name="jaxrpc-api.jar" value="${lib.home}/jaxrpc-api.jar"/>
+  <property name="saaj-api.jar" value="${lib.home}/saaj-api.jar"/>
+  <property name="saaj-impl.jar" value="${lib.home}/saaj-impl.jar"/>
+  <property name="relaxngDatatype.jar" value="${lib.home}/relaxngDatatype.jar"/>
+  <property name="ant.jar" value="${lib.home}/ant.jar"/>
+  <property name="jcert.jar" value="${lib.home}/jcert.jar"/>
+  <property name="jnet.jar"  value="${lib.home}/jnet.jar"/>
+  <property name="jsse.jar" value="${lib.home}/jsse.jar"/>
+
+  <property name="FastInfoset.jar" value="${lib.home}/FastInfoset.jar"/>
+  
+  <!--
+    NOTE - the following jars have been replaced by the SAAJ ones:
+    <property name="jaxm-api.jar" value="${lib.home}/jaxm-api.jar"/>
+    <property name="jaxm-client.jar" value="${lib.home}/jaxm-client.jar"/>
+  -->
+
+<!-- ************ Compiler Defaults *************************************** -->
+
+  <!-- Should Java compilations set the 'debug' compiler option? -->
+  <property name="compile.debug" value="true"/>
+
+  <!-- Should Java compilations set the 'deprecation' compiler option? -->
+  <property name="compile.deprecation" value="false"/>
+
+  <!-- Should Java compilations set the 'optimize' compiler option? -->
+  <property name="compile.optimize" value="true"/>
+
+  <!-- Construct compile classpath -->
+  <path id="compile.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${javamail.jar}"/>
+    <pathelement location="${jaf.jar}"/>
+    <pathelement location="${servlet.jar}"/>
+    <pathelement location="${saaj-api.jar}"/>
+    <pathelement location="${saaj-impl.jar}"/>
+    <pathelement location="${jaxrpc-api.jar}"/>
+    <pathelement location="${relaxngDatatype.jar}"/>
+    <pathelement location="${ant.jar}"/>
+    <pathelement location="${jcert.jar}"/>
+    <pathelement location="${jnet.jar}"/>
+    <pathelement location="${jsse.jar}"/>
+    <pathelement location="${FastInfoset.jar}"/>
+  </path>
+
+  <path id="test.classpath">
+    <pathelement location="${build.home}/classes" />
+    <pathelement location="${build.home}/test/classes" />
+    <pathelement location="${junit.jar}"/>
+    <path refid="compile.classpath" />
+    <pathelement path="${java.class.path}"/>
+  </path>
+
+  <path id="benchmark.classpath">
+    <pathelement location="${build.home}/classes" />
+    <pathelement location="${build.home}/test-benchmark/classes" />
+    <path refid="compile.classpath" />
+    <pathelement path="${java.class.path}"/>
+  </path>
+
+
+
+
+<!-- ************ Executable Targets ************************************** -->
+
+  <target name="prepare">
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/bin"/>
+    <mkdir dir="${build.home}/classes"/>
+    <mkdir dir="${build.home}/javadocs"/>
+    <mkdir dir="${build.home}/docs"/>
+    <mkdir dir="${build.home}/lib"/>
+    <mkdir dir="${build.home}/test"/>
+    <mkdir dir="${build.home}/test/classes"/>
+    <mkdir dir="${build.home}/test-benchmark"/>
+    <mkdir dir="${build.home}/test-benchmark/classes"/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <!-- Run javac through everything -->
+    <javac  srcdir="${source.home}"
+           destdir="${build.home}/classes"
+             debug="${compile.debug}"
+       deprecation="${compile.deprecation}"
+          optimize="${compile.optimize}">
+      <classpath refid="compile.classpath"/>
+    </javac>
+  </target>
+
+  <target name="image" depends="compile,prepare">
+   
+    <!-- Copy resource files etc -->
+    <copy todir="${build.home}/classes">
+      <fileset dir="${source.home}">
+        <include name="**/*.properties" />
+      </fileset>
+    </copy>
+
+    <!-- Copy executable files -->
+    <copy todir="${build.home}/bin">
+      <fileset dir="${bin.home}">
+        <include name="*" />
+      </fileset>
+    </copy>
+
+    <chmod perm="+x" file="${build.home}/bin/wsdlp.sh"/>
+    <chmod perm="+x" file="${build.home}/bin/wscompile.sh"/>
+    <chmod perm="+x" file="${build.home}/bin/wsdeploy.sh"/>
+
+    <!-- Copy dependent jars -->
+    <copy    todir="${build.home}/lib">
+      <fileset dir="${lib.home}/" 
+               includes="**/*.jar" 
+                   excludes="ant.jar, junit.jar, servlet.jar"/>
+    </copy>
+
+    <!-- Copy the J2EE mapping schema -->
+    <copy todir="${build.home}/classes/com/sun/xml/rpc/processor/modeler/j2ee/xml">
+        <fileset dir="${basedir}/etc/schemas" includes="**"/>
+    </copy>
+
+    <!-- Copy WsCompile Tool plugins -->
+    <copy todir="${build.home}/classes/META-INF/jaxrpc">
+        <fileset dir="${basedir}/etc/plugins" includes="**"/>
+    </copy>
+
+    <!-- Make the SPI jar -->
+    <jar jarfile="${build.home}/lib/jaxrpc-spi.jar"
+         manifest="${basedir}/etc/manifest">
+        <fileset dir="${build.home}/classes">
+            <include name="com/sun/xml/rpc/spi/**"/>
+        </fileset>
+    </jar>
+
+    <!-- Make the RI jar -->
+    <jar jarfile="${build.home}/lib/jaxrpc-impl.jar"
+         manifest="${basedir}/etc/impl-manifest">
+        <fileset dir="${build.home}/classes">
+            <exclude name="com/sun/xml/rpc/spi/**"/>
+        </fileset>
+    </jar>
+
+    <!-- <ant dir="${basedir}/samples"/> -->
+
+  </target>
+
+  <target name="clean">
+    <delete    dir="${build.home}"/>
+    <delete    dir="${dist.home}"/>
+    <delete> 
+      <fileset dir="." includes="**/*~" defaultexcludes="no"/>
+    </delete>
+    <delete    dir="${pkg.release.dir}"/>
+    <delete    dir="${rpm.release.dir}"/>
+    <delete    dir="${zip.release.dir}"/>
+  </target>
+
+  <target name="all" depends="clean,compile"/>
+
+  <target name="dist" depends="image, docs">
+    <mkdir dir="${dist.home}"/>
+    <mkdir dir="${dist.home}/bin"/>
+    <mkdir dir="${dist.home}/lib"/>
+    <mkdir dir="${dist.home}/docs"/>
+    <!-- <mkdir dir="${dist.home}/samples"/> -->
+
+    <copy    todir="${dist.home}/bin">
+      <fileset dir="${build.home}/bin"/>
+    </copy>
+
+    <delete file="${dist.home}/bin/wsdlp.bat"/>
+    <delete file="${dist.home}/bin/wsdlp.sh"/>
+
+    <chmod perm="+x" file="${dist.home}/bin/wscompile.sh"/>
+    <chmod perm="+x" file="${dist.home}/bin/wsdeploy.sh"/>
+
+    <copy    todir="${dist.home}/lib">
+      <fileset dir="${build.home}/lib"/>
+    </copy>
+
+    <!-- JUnit used by samples/HelloWorld -->
+    <copy todir="${dist.home}/lib" file="${basedir}/lib/junit.jar"/>
+	    
+    <copy    todir="${dist.home}/docs">
+      <fileset dir="${build.home}/docs"/>
+    </copy>
+
+    <!-- add a copy of the license and README files to the top level -->
+    <copy todir="${dist.home}"
+          file="README" />
+  </target>
+
+  <target name="wspack" depends="image, docs">
+    <mkdir dir="${wspack.home}"/>
+    <mkdir dir="${wspack.home}/bin"/>
+    <mkdir dir="${wspack.home}/lib"/>
+    <mkdir dir="${wspack.home}/docs"/>
+    <mkdir dir="${wspack.home}/samples"/>
+
+    <ant dir="${basedir}/samples/HelloWorld"/>
+
+<!-- Comment out since there are no custom scripts
+    <copy todir="${wspack.home}/bin">
+      <fileset dir="${wspack.custom.home}/bin"/>
+    </copy>
+-->
+
+    <copy todir="${wspack.home}/lib">
+      <fileset dir="${build.home}/lib"
+          includes="jaxrpc-impl.jar, jaxrpc-spi.jar"/>
+    </copy>
+
+    <!-- Copy "jaxrpc-impl" documentation files -->
+    <copy todir="${wspack.home}/docs/">
+      <fileset dir="${wspack.custom.home}/docs"/>
+    </copy>
+
+    <copy    todir="${wspack.home}/samples">
+      <fileset dir="${samples.home}">
+      </fileset>
+    </copy>
+    <move file="${wspack.home}/samples/HelloWorld/build.properties.jwsdp"
+          tofile="${wspack.home}/samples/HelloWorld/build.properties"/>
+    <move file="${wspack.home}/samples/AttachmentsSample/build.properties.jwsdp"
+	  tofile="${wspack.home}/samples/AttachmentsSample/build.properties"/>
+
+  </target>
+
+  <target name="javadocs" depends="image">
+    <javadoc packagenames="com.sun.*"
+             sourcepath="${source.home}"
+             destdir="${build.home}/javadocs"
+             author="false"
+             version="false"
+             windowtitle="${Name} Generated Documentation"
+             doctitle="${Name}"
+             bottom="Copyright &#169; 2001 Oracle and/or its affiliates. All Rights Reserved.">
+        <classpath refid="compile.classpath"/>
+    </javadoc>
+  </target>
+
+  <target name="docs" depends="prepare" >
+    <copy todir="${build.home}/docs">
+      <fileset dir="${docs.home}">
+        <include name="**/*.html" />
+        <include name="**/*.txt" />
+        <include name="**/*.jpg" />
+        <exclude name="**/internal/**" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile-tests" depends="image">
+    <javac srcdir="${test.home}"
+           destdir="${build.home}/test/classes"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}" >
+      <include name="**/*.java" />
+		<exclude name="http_test/**"/>
+		<exclude name="http_test/hello/**"/>
+      <classpath refid="test.classpath" />
+
+    </javac>
+
+    <!-- Make the tests jar -->
+    <jar jarfile="${build.home}/test/jaxrpc-tests.jar"
+         basedir="${build.home}/test/classes"
+         manifest="${basedir}/etc/manifest">
+    </jar>
+  </target>
+
+
+
+ <!-- =====================
+       RPM DISTRIBUTION 
+      ===================== -->
+  <!-- assumes the dist target has been called -->
+  <target name="create.rpm" description="Create JAX-RPC rpm">
+
+    <!-- assign prefix of where files will be installed on system -->
+    <property name="rpm.install.base"    value="/opt/sun"/>
+
+    <!-- make sure this directory is initially clean -->
+    <delete dir="${rpm.build.dir}/SOURCES"/>
+
+    <!-- Create build subdirectories -->
+    <mkdir dir="${rpm.build.dir}/BUILD"/>
+    <mkdir dir="${rpm.build.dir}/RPMS"/>
+    <mkdir dir="${rpm.build.dir}/SOURCES"/>
+    <mkdir dir="${rpm.build.dir}/SPECS"/>
+    <mkdir dir="${rpm.build.dir}/SRPMS"/>
+
+
+    <!-- copy jaxrpc bin files into the right directory structure -->
+    <copy tofile="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/bin/wscompile" overwrite="yes">
+      <fileset dir="${basedir}/rpm">
+        <include name="wscompile.template"/>
+      </fileset>
+    </copy>
+
+    <copy tofile="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/bin/wsdeploy" overwrite="yes">
+      <fileset dir="${basedir}/rpm">
+        <include name="wsdeploy.template"/>
+      </fileset>
+    </copy>
+
+    <!-- replace basedir of library locations in template files -->
+    <replace dir="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/bin" value="${rpm.install.base}/share/lib">
+      <replacetoken>%WEBSERVICES_LIB%</replacetoken>
+    </replace>
+
+    <!-- replace basedir of library locations in template files -->
+    <replace dir="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/bin" value="${rpm.install.base}/private/share/lib">
+      <replacetoken>%WEBSERVICES_PRIVATE_LIB%</replacetoken>
+    </replace>
+
+
+    <!-- copy jaxrpc specific jar files into the right directory structure -->
+    <copy todir="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/share/lib" overwrite="yes">
+      <fileset dir="${dist.home}/lib">
+        <include name="jaxrpc-impl.jar"/>
+        <include name="jaxrpc-api.jar"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}${rpm.install.base}/private/share/lib" overwrite="yes">
+      <fileset dir="${dist.home}/lib">
+        <include name="jaxrpc-spi.jar"/>
+      </fileset>
+    </copy>
+
+    <!-- compress jaxrpc files -->
+    <tar destfile="${rpm.build.dir}/SOURCES/sun-jaxrpc-${rpm.version}.tar" basedir="${rpm.build.dir}/SOURCES"/>
+
+    <!-- make output directory -->
+    <mkdir dir="${rpm.release.dir}"/>
+
+    <!-- copy rpm to dist directory -->
+    <copy todir="${rpm.release.dir}">
+      <fileset dir="${rpm.build.dir}/RPMS"/>
+    </copy>
+
+  </target>
+
+ <!-- =======================
+       ZIP FILE DISTRIBUTION 
+      ======================= -->
+  <!-- assumes the dist target has been called -->
+  <target name="create.zip" description="Create JAX-RPC zip file distribution for windows">
+
+    <!-- make build and output directories -->
+    <mkdir dir="${zip.build.dir}"/>
+    <mkdir dir="${zip.release.dir}"/>
+
+    <!-- copy jaxrpc bin files into the right directory structure -->
+    <copy tofile="${zip.build.dir}/jaxrpc/bin/wscompile.bat" overwrite="yes">
+      <fileset dir="${basedir}/zip">
+        <include name="wscompile.bat"/>
+      </fileset>
+    </copy>
+
+    <copy tofile="${zip.build.dir}/jaxrpc/bin/wsdeploy.bat" overwrite="yes">
+      <fileset dir="${basedir}/zip">
+        <include name="wsdeploy.bat"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${zip.build.dir}" overwrite="yes">
+      <fileset dir="${basedir}/zip">
+        <include name="filelist.txt"/>
+        <include name="version"/>
+      </fileset>
+    </copy>
+
+    <!-- replace parameters in version file  -->
+    <replace file="${zip.build.dir}/version" value="${pkg.version}">
+      <replacetoken>@jaxrpc.version@</replacetoken>
+    </replace>
+    <!-- replace date stamp... 1st specify correct format  -->
+    <tstamp>
+      <format property="pkg.datestamp" pattern="yyyyMMdd"/>
+    </tstamp>
+    <replace file="${zip.build.dir}/version" value="${pkg.datestamp}">
+      <replacetoken>@datestamp@</replacetoken>
+    </replace>
+    <replace file="${zip.build.dir}/version" value="${zip.release}">
+      <replacetoken>@zip.release@</replacetoken>
+    </replace>
+
+    <!-- copy jaxrpc specific jar files into the right directory structure -->
+    <copy todir="${zip.build.dir}/jaxrpc/lib" overwrite="yes">
+      <fileset dir="${dist.home}/lib">
+        <include name="jaxrpc-*.jar"/>
+      </fileset>
+    </copy>
+
+    <!-- make zip file -->
+    <zip destfile="${zip.release.dir}/jaxrpc.zip" basedir="${zip.build.dir}" whenempty="fail"/>
+
+
+  </target>
+
+
+
+<!-- Target to generate stubs. -->
+
+<!-- ***************************************************************** -->
+
+<!-- 
+
+<target name="generate-test-stubs" 
+          depends="image, base_stub_tie_test-stubs, dii_test-stubs, handler_test-stubs, pluggable_serializer_test-stubs"/>
+
+<target name="generate-test-stubs" 
+          depends="image, handler_test-stubs"/>
+-->
+
+<!--  
+<target name="generate-test-stubs" 
+          depends="image, pluggable_serializer_test-stubs"/>
+
+  <target name="base_stub_tie_test-stubs" depends="image">
+     <javac srcdir="${test.home}/"
+           destdir="${build.home}/test/classes"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}">
+      <classpath refid="test.classpath" />
+      <include name="base_stub_tie_test/Base.java"/>
+    </javac>
+
+    <taskdef name="xrpcc" classname="com.sun.xml.rpc.tools.ant.Xrpcc">
+      <classpath refid="compile.classpath"/>
+    </taskdef>
+    <xrpcc base="${build.home}/test/classes"
+           sourcebase="${test.home}/"
+           config="${test.home}/base_stub_tie_test/Base_config.xml"
+           classpathref="test.classpath"/>
+  </target>
+
+  <target name="handler_test-stubs" depends="image">
+     <javac srcdir="${test.home}/"
+           destdir="${build.home}/test/classes"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}">
+      <include name="handler_test/Handler.java"/>
+      <include name="handler_test/HandlerBase.java"/>
+      <include name="handler_test/HandlerImpl.java" />
+      <include name="handler_test/ClientHandler1.java"/>
+      <include name="handler_test/ClientHandler2.java"/>
+      <include name="handler_test/ClientHandler3.java"/>
+      <include name="handler_test/ServerHandler1.java"/>
+      <include name="handler_test/ServerHandler2.java"/>
+      <include name="handler_test/ServerHandler3.java"/>
+      <classpath refid="test.classpath" />
+    </javac>
+    <taskdef name="xrpcc" classname="com.sun.xml.rpc.tools.ant.Xrpcc">
+      <classpath refid="compile.classpath"/>
+    </taskdef>
+    <xrpcc base="${build.home}/test/classes"
+           sourcebase="${test.home}/"
+           config="${test.home}/handler_test/handler_config.xml"
+           classpathref="test.classpath"/>
+  </target>
+
+
+  <target name="dii_test-stubs" depends="image">
+     <javac srcdir="${test.home}/"
+           destdir="${build.home}/test/classes"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}">
+      <include name="dii_test/HelloIF.java"/>
+      <classpath refid="test.classpath" />
+    </javac>
+    <taskdef name="xrpcc" classname="com.sun.xml.rpc.tools.ant.Xrpcc">
+      <classpath refid="compile.classpath"/>
+    </taskdef>
+    <xrpcc base="${build.home}/test/classes"
+           sourcebase="${test.home}/"
+           config="${test.home}/dii_test/HelloIF.config"
+           classpathref="test.classpath"/>
+  </target>
+
+  <target name="pluggable_serializer_test-stubs" depends="image">
+     <javac srcdir="${test.home}/"
+           destdir="${build.home}/test/classes"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}">
+      <include name="pluggable_serializer_test/PluggableBase.java"/>
+      <include name="pluggable_serializer_test/BaseFoo.java"/>
+      <include name="pluggable_serializer_test/PluggableSerializerFactory.java"/>
+      <include name="pluggable_serializer_test/PluggableDeserializerFactory.java"/>
+      <classpath refid="test.classpath" />
+    </javac>
+    <taskdef name="xrpcc" classname="com.sun.xml.rpc.tools.ant.Xrpcc">
+      <classpath refid="compile.classpath"/>
+    </taskdef>
+    <xrpcc base="${build.home}/test/classes"
+           sourcebase="${test.home}/"
+           config="${test.home}/pluggable_serializer_test/Pluggable_config.xml"
+           classpathref="test.classpath"/>
+  </target>
+
+-->
+
+<!-- ***************************************************************** -->
+
+  <target name="run-tests" depends="compile-tests, ant-tools-test">
+    <junit printsummary="no" haltonfailure="no" fork="true">
+      <classpath refid="test.classpath"/>
+      <formatter type="plain" usefile="false" />
+      <batchtest>
+        <fileset dir="${build.home}/test/classes">
+          <include name="**/AllTests.class" />
+          <exclude name="jaxrpc_tests/AllTests.class" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="run-single-test" if="testcase" depends="compile-tests">
+    <junit printsummary="no" haltonfailure="yes" fork="true">
+      <classpath refid="test.classpath"/>
+      <formatter type="plain" usefile="false" />
+      <test name="${testcase}" />
+    </junit>
+  </target>
+
+  <target name="ant-tools-test" depends="compile-tests">
+    <ant antfile="test/src/ant_tasks_scripts/build.xml"/>
+  </target>
+  
+  <target name="compile-benchmarks" depends="image">
+    <javac srcdir="${benchmark.home}"
+           destdir="${build.home}/test-benchmark/classes"
+           debug="false"
+           optimize="true"
+           deprecation="true" >
+      <include name="**/*.java" />
+      <classpath refid="benchmark.classpath" />
+    </javac>
+  </target>
+
+  <target name="run-xml-benchmark" depends="compile-benchmarks">
+    <java classname="xml_benchmark.Main"
+          classpathref="benchmark.classpath"
+          fork="true" />
+  </target>
+
+  <target name="run-interop-benchmark" depends="compile-benchmarks">
+    <java classname="stub_tie_benchmark.Main"
+          classpathref="benchmark.classpath"
+          fork="true" />
+  </target>
+
+  <target name="run-benchmarks" depends="run-xml-benchmark, run-interop-benchmark"/>
+
+  <target name="generate-binary-bundle" depends="image"
+          description="generate the binary distribution installer with the license click-through">
+
+    <!-- make directory to package and copy everything to it -->
+    <property name="binary.drop.dir" value="${build.home}/bin-bundle"/>
+    <copy todir="${binary.drop.dir}/bin">
+      <fileset dir="${build.home}/bin">
+        <include name="*.sh"/>
+        <include name="*.bat"/>
+      </fileset>
+    </copy>
+    <copy todir="${binary.drop.dir}/docs">
+      <fileset dir="${basedir}/docs">
+        <!-- automatically ignores CVS dirs -->
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+    <copy todir="${binary.drop.dir}/lib">
+      <fileset dir="${build.home}/lib">
+        <include name="jaxrpc-impl.jar"/>
+        <include name="jaxrpc-spi.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="${binary.drop.dir}">
+      <fileset dir="${basedir}">
+        <!-- automatically ignores CVS dirs -->
+        <include name="samples/**"/>
+      </fileset>
+    </copy>
+    <copy todir="${binary.drop.dir}">
+      <fileset dir="${basedir}/tools/installer/binary_bundle">
+        <include name="README"/>
+        <include name="*.html"/>
+      </fileset>
+    </copy>
+    
+    <tstamp/>
+
+    <!-- make directory for installer to work with and create zip file of contents -->
+    <property name="installer.stage" value="${build.home}/binary-installer"/>
+    <property name="installer.name" value="installer"/>
+    
+    <mkdir dir="${installer.stage}"/>
+    <zip destfile="${installer.stage}/package.zip">
+      <zipfileset dir="${binary.drop.dir}"/>
+    </zip>
+    
+    <!-- build installer -->
+    <ant dir="tools/installer"/>
+    <jar destfile="${build.home}/binary-installer.jar">
+      <manifest>
+        <attribute name="Main-class" value="com.sun.xml.rpc.installer.Main"/>
+      </manifest>
+      <fileset dir="${installer.stage}"/>
+      <fileset dir="${build.home}/installer/build/classes"
+               includes="**/*"
+               excludes="*" /><!-- exclude things in the root package -->
+      <zipfileset dir="${basedir}/tools/installer/binary_bundle"
+          includes="LICENSE.txt"
+          fullpath="license.txt"/>
+    </jar>
+
+  </target>
+  
+  <target name="generate-source-bundle" depends="prepare"
+          description="generate the source distribution installer with the license click-through">
+
+    <!-- make directory to package and copy everything to it -->
+    <property name="source.drop.dir" value="${build.home}/source-bundle"/>
+    <mkdir dir="${source.drop.dir}/jaxrpc-si/src"/>
+    <mkdir dir="${source.drop.dir}/jaxrpc-si/src/META-INF"/>
+    <mkdir dir="${source.drop.dir}/jaxrpc-si/lib"/>
+    <mkdir dir="${source.drop.dir}/jaxrpc-si/bin"/>
+    <copy file="${basedir}/tools/installer/source_bundle/build.xml"
+        todir="${source.drop.dir}/jaxrpc-si"/>
+    <copy file="${basedir}/tools/installer/source_bundle/readme.txt"
+        todir="${source.drop.dir}/jaxrpc-si"/>
+    <copy file="${basedir}/tools/installer/source_bundle/ToolPlugin.xml"
+        todir="${source.drop.dir}/jaxrpc-si/src/META-INF"/>
+    <copy todir="${source.drop.dir}/jaxrpc-si/bin">
+      <fileset dir="${basedir}/tools/installer/source_bundle">
+        <include name="*.sh"/>
+        <include name="*.bat"/>
+      </fileset>
+    </copy>
+    <copy todir="${source.drop.dir}/jaxrpc-si/src">
+      <fileset dir="${source.home}">
+        <include name="**/*.java"/>
+        <include name="**/*.properties"/>
+        <exclude name="com/sun/xml/rpc/resources/j2ee*.properties"/>
+        <exclude name="com/sun/xml/rpc/processor/modeler/j2ee/**/*.java"/>
+        <exclude name="com/sun/xml/rpc/processor/generator/nodes/*.java"/>
+        <exclude name="com/sun/xml/rpc/processor/config/J2EEModelInfo.java"/>
+        <exclude name="com/sun/xml/rpc/processor/config/parser/J2EEModelInfoParser.java"/>
+        <exclude name="com/sun/xml/rpc/processor/generator/JaxRpcMappingGenerator.java"/>
+        <exclude name="com/sun/xml/rpc/tools/wscompile/J2EEToolPlugin.java"/>
+      </fileset>
+    </copy>
+    
+    <!--
+        zip up that directory so that the user ends up with a single
+        zip file after agreeing to the license. could skip the copy step
+        above, but want to have new directory name at top level of zip file.
+    -->
+    <zip destfile="${source.drop.dir}/jaxrpc-src.zip">
+      <zipfileset dir="${source.drop.dir}"/>
+    </zip>
+    <delete dir="${source.drop.dir}/jaxrpc-si"/>
+
+    <tstamp/>
+
+    <!-- make directory for installer to work with and create zip file of contents -->
+    <property name="installer.stage" value="${build.home}/source-installer"/>
+    <property name="installer.name" value="installer"/>
+    
+    <mkdir dir="${installer.stage}"/>
+    <zip destfile="${installer.stage}/package.zip">
+      <zipfileset dir="${source.drop.dir}"/> <!-- prefix="jaxb-ri-${DSTAMP}" /> -->
+    </zip>
+    
+    <!-- build installer -->
+    <ant dir="tools/installer"/>
+    <jar destfile="${build.home}/source-installer.jar">
+      <manifest>
+        <attribute name="Main-class" value="com.sun.xml.rpc.installer.Main"/>
+      </manifest>
+      <fileset dir="${installer.stage}"/>
+      <fileset dir="${build.home}/installer/build/classes"
+               includes="**/*"
+               excludes="*" /><!-- exclude things in the root package -->
+      <zipfileset dir="${basedir}/tools/installer/source_bundle"
+          includes="LICENSE.txt"
+          fullpath="license.txt"/>
+    </jar>
+
+  </target>
+
+  <!-- Prepare files uploaded to maven repository.
+  Generates binary jars, source jars, javadoc jars
+  and its *.asc signatures for maven upload in ${build.home} directory.
+
+  These files should be manually uploaded to maven than.-->
+  <target name="maven-distribution" depends="image">
+    <mkdir dir="${maven.dist.dir}" />
+
+    <!-- Copy jars -->
+    <copy file="${build.home}/lib/jaxrpc-api.jar" tofile="${maven.dist.dir}/jaxrpc-api-${pkg.version}.jar" />
+    <copy file="${build.home}/lib/jaxrpc-spi.jar" tofile="${maven.dist.dir}/jaxrpc-spi-${pkg.version}.jar" />
+    <copy file="${build.home}/lib/jaxrpc-impl.jar" tofile="${maven.dist.dir}/jaxrpc-impl-${pkg.version}.jar" />
+
+    <!-- Make the SPI sources jar -->
+    <jar jarfile="${maven.dist.dir}/jaxrpc-spi-${pkg.version}-sources.jar">
+      <fileset dir="${source.home}/">
+        <include name="com/sun/xml/rpc/spi/**"/>
+      </fileset>
+    </jar>
+
+    <!-- Make the RI sources jar -->
+    <jar jarfile="${maven.dist.dir}/jaxrpc-impl-${pkg.version}-sources.jar">
+      <fileset dir="${source.home}/">
+        <exclude name="com/sun/xml/rpc/spi/**"/>
+      </fileset>
+    </jar>
+
+    <javadoc packagenames="com.sun.*"
+             sourcepath="${source.home}"
+             excludepackagenames="com.sun.xml.rpc.spi.*"
+             destdir="${maven.dist.dir}/impl-javadoc"
+             author="false"
+             version="false"
+             windowtitle="${Name} Generated Documentation"
+             doctitle="${Name}"
+             bottom="Copyright &#169; 2001 Oracle and/or its affiliates. All Rights Reserved.">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+
+    <jar basedir="${maven.dist.dir}/impl-javadoc" destfile="${maven.dist.dir}/jaxrpc-impl-${pkg.version}-javadoc.jar" />
+
+    <javadoc packagenames="com.sun.xml.rpc.spi.*"
+             sourcepath="${source.home}"
+             destdir="${maven.dist.dir}/spi-javadoc"
+             author="false"
+             version="false"
+             windowtitle="${Name} Generated Documentation"
+             doctitle="${Name}"
+             bottom="Copyright &#169; 2001 Oracle and/or its affiliates. All Rights Reserved.">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+
+    <jar basedir="${maven.dist.dir}/spi-javadoc" destfile="${maven.dist.dir}/jaxrpc-spi-${pkg.version}-javadoc.jar" />
+
+    <copy file="${basedir}/maven/jaxrpc-api.pom" tofile="${maven.dist.dir}/jaxrpc-api-${pkg.version}.pom" />
+    <copy file="${basedir}/maven/jaxrpc-spi.pom" tofile="${maven.dist.dir}/jaxrpc-spi-${pkg.version}.pom" />
+    <copy file="${basedir}/maven/jaxrpc-impl.pom" tofile="${maven.dist.dir}/jaxrpc-impl-${pkg.version}.pom" />
+
+    <!-- signing -->
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-api-${pkg.version}.pom" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-impl-${pkg.version}.pom" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-spi-${pkg.version}.pom" />
+    </exec>
+
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-api-${pkg.version}.jar" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-impl-${pkg.version}.jar" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-spi-${pkg.version}.jar" />
+    </exec>
+
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-impl-${pkg.version}-sources.jar" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-spi-${pkg.version}-sources.jar" />
+    </exec>
+
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-impl-${pkg.version}-javadoc.jar" />
+    </exec>
+    <exec executable="gpg">
+      <arg value="-ab" />
+      <arg value="${maven.dist.dir}/jaxrpc-spi-${pkg.version}-javadoc.jar" />
+    </exec>
+  </target>
+  
+  <target name="main" depends="image"/>
+
+</project> 

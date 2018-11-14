@@ -18,11 +18,28 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.5</version>
     </parent>
+    
     <groupId>jakarta.xml.rpc</groupId>
     <artifactId>jakarta.xml.rpc-impl</artifactId>
-    <version>1.1.3-SNAPSHOT</version>
+    <version>1.1.5-SNAPSHOT</version>
+    <name>JAXRPC SPI</name>
+    <description>JAXRPC Reference Implementation</description>
+    <url>https://github.com/eclipse-ee4j/jax-rpc-ri</url>
+    
+    <scm>
+        <connection>scm:git:git@github.com:eclipse-ee4j/jax-rpc-ri.git</connection>
+        <developerConnection>scm:git:git@github.com:eclipse-ee4j/jax-rpc-ri.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/jax-rpc-ri</url>
+    </scm>
+    
+    <licenses>
+        <license>
+            <name>EPL-2.0</name>
+            <url>http://www.eclipse.org/legal/epl-2.0</url>
+        </license>
+    </licenses>
     
     <dependencies>
         <dependency>
@@ -63,7 +80,7 @@
         <dependency>
             <groupId>com.sun.xml.fastinfoset</groupId>
             <artifactId>FastInfoset</artifactId>
-            <version>1.0.2</version>
+            <version>1.2.15</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>

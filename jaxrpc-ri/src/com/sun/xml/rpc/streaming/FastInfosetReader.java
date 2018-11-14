@@ -167,7 +167,7 @@ public final class FastInfosetReader extends StAXDocumentParser implements XMLRe
                 case EOF :
                     return state;
                 case CHARS :
-                    if (_characters != null && !isWhiteSpaceCharacters()) {
+                    if (_characters != null && !isWhiteSpace()) {
                         return CHARS;
                     }
                     continue;
@@ -281,17 +281,6 @@ public final class FastInfosetReader extends StAXDocumentParser implements XMLRe
         return new XMLReaderException(
             "xmlreader.ioException",
             new LocalizableExceptionAdapter(e));
-    }
-    
-    private boolean isWhiteSpaceCharacters() {
-        int i = _charactersOffset;
-        final int end = i + _charactersLength;
-        while (i < end) {
-            if (_characters[i++] > '\u0020') {
-                return false;
-            }
-        }
-        return true;
     }
     
     

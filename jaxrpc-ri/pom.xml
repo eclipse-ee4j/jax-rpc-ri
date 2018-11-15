@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright (c) 2018 Payara Foundation and/or its affiliates.
+    Copyright (c) 2018 Payara Services Ltd. and/or its affiliates.
     
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -22,9 +22,11 @@
     </parent>
     
     <groupId>jakarta.xml.rpc</groupId>
-    <artifactId>jakarta.xml.rpc-impl</artifactId>
+    <artifactId>jakarta.xml.rpc-parent</artifactId>
     <version>1.1.5-SNAPSHOT</version>
-    <name>JAXRPC SPI</name>
+    <packaging>pom</packaging>
+    
+    <name>JAXRPC Implementation Parent</name>
     <description>JAXRPC Reference Implementation</description>
     <url>https://github.com/eclipse-ee4j/jax-rpc-ri</url>
     
@@ -40,6 +42,13 @@
             <url>http://www.eclipse.org/legal/epl-2.0</url>
         </license>
     </licenses>
+    
+    <modules>
+        <module>spi</module>
+        <module>impl</module>
+        <module>tools/installer</module>
+        <module>samples</module>
+    </modules>
     
     <dependencies>
         <dependency>
@@ -95,8 +104,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <sourceDirectory>src</sourceDirectory>
-    </build>
 </project>

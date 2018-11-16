@@ -19,17 +19,11 @@
         <groupId>jakarta.xml.rpc</groupId>
         <artifactId>jakarta.xml.rpc-parent</artifactId>
         <version>1.1.5-SNAPSHOT</version>
-        <relativePath>../../</relativePath>
+        <relativePath>../</relativePath>
     </parent>
     
-    <groupId>jakarta.xml.rpc</groupId>
-    <artifactId>jakarta.xml.rpc-installer</artifactId>
-    <name>JAX-RPC Installer</name>
-    <version>1.1.5-SNAPSHOT</version>
+    <artifactId>jakarta.xml.rpc-spi</artifactId>
+    <name>JAX-RPC Service Provicer Interface</name>
     <packaging>jar</packaging>
-    
-    <build>
-        <sourceDirectory>src</sourceDirectory>
-    </build>
     
 </project>

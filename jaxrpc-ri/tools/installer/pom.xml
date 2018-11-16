@@ -19,7 +19,6 @@
         <groupId>jakarta.xml.rpc</groupId>
         <artifactId>jakarta.xml.rpc-parent</artifactId>
         <version>1.1.5-SNAPSHOT</version>
-        <relativePath>../../</relativePath>
     </parent>
     
     <groupId>jakarta.xml.rpc</groupId>
@@ -27,9 +26,23 @@
     <name>JAX-RPC Installer</name>
     <version>1.1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
+
     <build>
-        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     
 </project>

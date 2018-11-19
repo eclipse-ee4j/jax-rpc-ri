@@ -78,7 +78,7 @@
 
         <dependency>
             <groupId>jakarta.xml.rpc</groupId>
-            <artifactId>spi</artifactId>
+            <artifactId>jaxrpc-spi</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

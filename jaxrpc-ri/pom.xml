@@ -114,7 +114,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
-                        <release>6</release>
+                        <compile>1.8</compile>
+                        <target>1.8</target>
                     </configuration>
                 </plugin>
                 <plugin>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <!--
     Copyright (c) 2018 Payara Services Ltd. and/or its affiliates.
     
@@ -19,6 +19,7 @@
         <groupId>jakarta.xml.rpc</groupId>
         <artifactId>jakarta.xml.rpc-parent</artifactId>
         <version>1.1.5-SNAPSHOT</version>
+	<relativePath>../../</relativePath>
     </parent>
     
     <groupId>jakarta.xml.rpc</groupId>

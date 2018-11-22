@@ -60,10 +60,6 @@
             <outputDirectory>docs</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../samples</directory>
-            <outputDirectory>samples</outputDirectory>
-        </fileSet>
-        <fileSet>
             <directory>${project.basedir}/../etc/bin</directory>
             <outputDirectory>bin</outputDirectory>
         </fileSet>

@@ -39,6 +39,9 @@
     <moduleSets>
         <moduleSet>
             <useAllReactorProjects>true</useAllReactorProjects>
+            <excludes>
+                <exclude>${project.groupId}:jakarta.xml.rpc.samples.*:*</exclude>
+            </excludes>
             <binaries>
                 <outputDirectory>lib</outputDirectory>
                 <unpack>false</unpack>
@@ -62,6 +65,13 @@
         <fileSet>
             <directory>${project.basedir}/../etc/bin</directory>
             <outputDirectory>bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/../samples</directory>
+            <excludes>
+                <exclude>**/target/**</exclude>
+            </excludes>
+            <outputDirectory>samples</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

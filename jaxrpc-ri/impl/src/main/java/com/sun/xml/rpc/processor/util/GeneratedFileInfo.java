@@ -39,8 +39,7 @@ public class GeneratedFileInfo
     /**
      * Adds the file object to the container
      *
-     * @param instance of the file to be added
-     * @return void
+     * @param file instance of the file to be added
      */
     public void setFile( File file ) {
         this.file = file;
@@ -49,8 +48,7 @@ public class GeneratedFileInfo
     /**
      * Adds the type of file it is the container
      *
-     * @param Type string which specifices the type
-     * @return void
+     * @param type string which specifies the type
      */
     public void setType( String type ) {
         this.type = type;
@@ -59,7 +57,6 @@ public class GeneratedFileInfo
     /**
      * Gets the file that got added
      *
-     * @param none
      * @return File instance
      */
     public File getFile() {
@@ -69,7 +66,6 @@ public class GeneratedFileInfo
     /**
      * Get the file type that got added
      *
-     * @param none
      * @return File type of datatype String
      */
     public String getType() {

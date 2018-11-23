@@ -16,8 +16,6 @@
 
 package com.sun.xml.rpc.processor.modeler.wsdl;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -28,9 +26,8 @@ import com.sun.xml.rpc.wsdl.framework.Extensible;
 import com.sun.xml.rpc.wsdl.framework.Extension;
 
 /**
- * @author JAX-RPC Development Team
- *
  * WSDLModeler for JAXRPC version 1.1.1
+ * @author JAX-RPC Development Team
  */
 public class WSDLModeler111 extends WSDLModelerBase {
 
@@ -64,6 +61,7 @@ public class WSDLModeler111 extends WSDLModelerBase {
      * Only JAXRPC SI 1.1.2 and onwards support wsdl mime extension and swaref.
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#getAnyExtensionOfType(com.sun.xml.rpc.wsdl.framework.Extensible, java.lang.Class)
      */
+    @Override
     protected Extension getAnyExtensionOfType(
         Extensible extensible,
         Class type) {

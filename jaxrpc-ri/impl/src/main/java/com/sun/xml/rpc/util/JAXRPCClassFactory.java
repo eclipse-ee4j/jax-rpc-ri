@@ -73,7 +73,6 @@ public class JAXRPCClassFactory {
     /**
      * Sets the version to a static classVersion
      * @param version
-     * @return
      */
     public void setSourceVersion(String version) {
         if (version == null)
@@ -93,7 +92,7 @@ public class JAXRPCClassFactory {
      * @param options
      * @param conflictingClassNames
      * @param javaTypes
-     * @return
+     * @return the appropriate SchemaAnalyzer for the JAX-RPC version
      */
     public SchemaAnalyzerBase createSchemaAnalyzer(
         AbstractDocument document,
@@ -154,11 +153,8 @@ public class JAXRPCClassFactory {
      * Returns the instance of InternalSchemaBuilderBase for specific target version set for the factory.
      * 
      * @param document
-     * @param modelInfo
      * @param options
-     * @param conflictingClassNames
-     * @param javaTypes
-     * @return
+     * @return the appropriate InternalSchemaBuilderBase for the JAX-RPC version
      */
     public InternalSchemaBuilderBase createInternalSchemaBuilder(
         AbstractDocument document,
@@ -191,7 +187,7 @@ public class JAXRPCClassFactory {
      * 
      * @param modelInfo
      * @param options
-     * @return
+     * @return the appropriate WSDLModeler for the JAX-RPC version
      */
     public WSDLModelerBase createWSDLModeler(
         WSDLModelInfo modelInfo,
@@ -224,7 +220,7 @@ public class JAXRPCClassFactory {
     /**
      * Returns the Names for specific target version.
      * //bug fix:4904604     
-     * @return
+     * @return the appropriate {@link Names} for the JAX-RPC version
      */
     public Names createNames() {
         Names names = null;
@@ -247,7 +243,7 @@ public class JAXRPCClassFactory {
     /**
      * Returns the SOAPSimpleTypeCreatorBase for specific target version.
      * 
-     * @return
+     * @return the appropriate SOAPSimpleTypeCreatorBase for the JAX-RPC version
      */
     public SOAPSimpleTypeCreatorBase createSOAPSimpleTypeCreator() {
         SOAPSimpleTypeCreatorBase soapType = null;
@@ -273,7 +269,7 @@ public class JAXRPCClassFactory {
     /**
      * Returns the SOAPSimpleTypeCreatorBase for specific target version.
      * 
-     * @return
+     * @return the appropriate SOAPSimpleTypeCreatorBase for the JAX-RPC version
      */
     public SOAPSimpleTypeCreatorBase createSOAPSimpleTypeCreator(boolean useStrictMode) {
         SOAPSimpleTypeCreatorBase soapType = null;
@@ -299,7 +295,7 @@ public class JAXRPCClassFactory {
     /**
      * Returns the SOAPSimpleTypeCreatorBase for specific target version.
      * 
-     * @return
+     * @return the appropriate SOAPSimpleTypeCreatorBase for the JAX-RPC version
      */
     public SOAPSimpleTypeCreatorBase createSOAPSimpleTypeCreator(
         boolean useStrictMode,

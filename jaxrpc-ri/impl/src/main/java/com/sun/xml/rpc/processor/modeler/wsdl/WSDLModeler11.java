@@ -31,9 +31,8 @@ import com.sun.xml.rpc.wsdl.framework.Extensible;
 import com.sun.xml.rpc.wsdl.framework.Extension;
 
 /**
- * @author JAX-RPC Development Team
- *
  * WSDLModeler for JAXRPC version 1.1
+ * @author JAX-RPC Development Team
  */
 public class WSDLModeler11 extends WSDLModelerBase {
 
@@ -46,15 +45,16 @@ public class WSDLModeler11 extends WSDLModelerBase {
     }
 
     /**
-     * bug fix: 4884736, this method can be overriden from subclasses of WSDLModelerBase
+     * bug fix: 4884736, this method can be overridden from subclasses of WSDLModelerBase
      * Returns soapbinding:fault name. If null then gives warning for wsi R2721 and uses 
      * wsdl:fault name.
      * 
-     * @param faultPartName - to be used by versions < 1.1
+     * @param faultPartName - to be used by versions &lt; 1.1
      * @param soapFaultName
      * @param bindFaultName
-     * @return
+     * @return soapFaultName if not null otherwise bindFaultName
      */
+    @Override
     protected String getFaultName(
         String faultPartName,
         String soapFaultName,
@@ -64,6 +64,7 @@ public class WSDLModeler11 extends WSDLModelerBase {
         return (soapFaultName == null) ? bindFaultName : soapFaultName;
     }
 
+    @Override
     protected String getLiteralJavaMemberName(Fault fault) {
         String javaMemberName =
             fault.getBlock().getName().getLocalPart();
@@ -90,6 +91,7 @@ public class WSDLModeler11 extends WSDLModelerBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#getHeaderFaultSequenceType(com.sun.xml.rpc.processor.model.AbstractType, com.sun.xml.rpc.wsdl.document.MessagePart, javax.xml.namespace.QName)
      */
+    @Override
     protected AbstractType getHeaderFaultSequenceType(
         AbstractType faultType,
         MessagePart faultPart,
@@ -100,6 +102,7 @@ public class WSDLModeler11 extends WSDLModelerBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#isSingleInOutPart(java.util.Set, com.sun.xml.rpc.wsdl.document.MessagePart)
      */
+    @Override
     protected boolean isSingleInOutPart(
         Set inputParameterNames,
         MessagePart outputPart) {
@@ -110,6 +113,7 @@ public class WSDLModeler11 extends WSDLModelerBase {
      * Only JAXRPC SI 1.1.2 and onwards support wsdl mime extension and swaref.
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#getAnyExtensionOfType(com.sun.xml.rpc.wsdl.framework.Extensible, java.lang.Class)
      */
+    @Override
     protected Extension getAnyExtensionOfType(
             Extensible extensible,
             Class type) {

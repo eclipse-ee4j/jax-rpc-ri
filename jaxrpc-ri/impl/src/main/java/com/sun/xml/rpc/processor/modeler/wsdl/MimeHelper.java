@@ -27,8 +27,8 @@ import com.sun.xml.rpc.processor.modeler.JavaSimpleTypeCreator;
  */
 public class MimeHelper {
     /**
-     * @param newMimePart
-     * @return
+     * @param mimePart
+     * @return a unique id based on the mime part
      */
     protected static String getAttachmentUniqueID(String mimePart) {
         //return "uuid@" + mimePart;
@@ -37,7 +37,7 @@ public class MimeHelper {
 
     /**
      * @param mimeType
-     * @return
+     * @return false if the mime type is text, XML or multipart, true otherwise
      */
     protected static boolean isMimeTypeBinary(String mimeType) {
         if (mimeType.equals(JPEG_IMAGE_MIME_TYPE)

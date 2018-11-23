@@ -32,7 +32,7 @@ import com.sun.xml.rpc.processor.util.ProcessorEnvironment;
 
 /**
  * @author  Qingqing Ouyang
- * @version 
+ * @version 1.1.5
  */
 public class ServiceInterfaceMappingNode extends JaxRpcMappingNode {
 
@@ -47,8 +47,8 @@ public class ServiceInterfaceMappingNode extends JaxRpcMappingNode {
      *
      * @param parent node in the DOM tree 
      * @param nodeName name for the root element for this DOM tree fragment
-     * @param model jaxrpc model to write
      * @param config jaxrpc configuration
+     * @param service service details to write
      * @return the DOM tree top node
      */
     public Node write(

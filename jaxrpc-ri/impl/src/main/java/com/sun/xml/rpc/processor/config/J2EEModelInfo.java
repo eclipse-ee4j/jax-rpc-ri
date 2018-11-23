@@ -71,7 +71,7 @@ public class J2EEModelInfo extends WSDLModelInfo
 
     /**
      * Constructor for J2EEModelInfo
-     * @param args args for this run of wsdlc
+     * @param mappingXml args for this run of wsdlc
      */
     public J2EEModelInfo (JaxRpcMappingXml mappingXml) {
         setJaxRcpMappingXml(mappingXml);
@@ -99,6 +99,7 @@ public class J2EEModelInfo extends WSDLModelInfo
     }
 
 
+    @Override
     protected Modeler getModeler(Properties options) {
   
         if (VersionUtil.isVersion111(options.getProperty(
@@ -135,9 +136,9 @@ public class J2EEModelInfo extends WSDLModelInfo
     }
 
     /**
-     * Find java name Service Endpoint Interaface
+     * Find java name Service Endpoint Interface
      * @param bindingQName QName of binding
-     * @param portypeQName QName of portType
+     * @param portTypeQName QName of portType
      * @param portQName    QName of port
      * @return the fully qualified Java name for a portType
      */
@@ -465,7 +466,7 @@ public class J2EEModelInfo extends WSDLModelInfo
     /**
      * Find the constructor parameter order for an exception generated
      * from a WSDL message that points to a complexType
-     * @return HashMap containg mapping of element name to constructor order
+     * @return HashMap containing mapping of element name to constructor order
      * or null if wsdlMessage can't be found
      */
     public HashMap exceptionConstructorOrder(QName wsdlMessage) {

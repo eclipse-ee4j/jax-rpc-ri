@@ -230,7 +230,7 @@ public final class StreamingParserImpl extends StreamingParser {
      *          Whether an appropriate article ("a", "an", "some", or "the") is
      *          to be prepended to the description string
      *
-     * @returns  A string describing the given parser state.
+     * @return  A string describing the given parser state.
      */
     public String describe(boolean articleNeeded) {
         return describe(cur, curName, curValue, articleNeeded);

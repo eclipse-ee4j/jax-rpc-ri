@@ -22,7 +22,7 @@ import org.w3c.dom.Node;
 
 /**
  * @author  Qingqing Ouyang
- * @version 
+ * @version 1.1.5
  */
 public abstract class JaxRpcMappingNode extends java.lang.Object {
 
@@ -47,7 +47,7 @@ public abstract class JaxRpcMappingNode extends java.lang.Object {
      * <p>
      * Append a new element child to the current node 
      * </p>
-     * @param parentNode is the parent node for the new child element
+     * @param parent is the parent node for the new child element
      * @param elementName is new element tag name
      * @return the newly created child node
      */
@@ -67,7 +67,7 @@ public abstract class JaxRpcMappingNode extends java.lang.Object {
      * @param parent for the new child element
      * @param elementName is the new element tag name
      * @param text the text for the new element
-     * @result the newly create child node
+     * @return the newly create child node
      */
     public static Node appendTextChild(
         Node parent,
@@ -89,7 +89,7 @@ public abstract class JaxRpcMappingNode extends java.lang.Object {
      * @param parent for the new child element
      * @param elementName is the new element tag name
      * @param value the int value for the new element
-     * @result the newly create child node
+     * @return the newly create child node
      */
     public static Node appendTextChild(
         Node parent,
@@ -105,7 +105,7 @@ public abstract class JaxRpcMappingNode extends java.lang.Object {
      * @param parent for the new child element
      * @param elementName is the new element tag name
      * @param text the text for the new element
-     * @result the newly create child node
+     * @return the newly create child node
      */
     public static Node forceAppendTextChild(
         Node parent,
@@ -126,7 +126,6 @@ public abstract class JaxRpcMappingNode extends java.lang.Object {
      * @param parent for the new child element
      * @param elementName is the new element tag name
      * @param text the text for the new element
-     * @result the newly create child node
      */
     public static void setAttribute(
         Element parent,

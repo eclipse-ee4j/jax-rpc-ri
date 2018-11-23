@@ -14,12 +14,6 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-/*
- * 
- * 
- *  * @ author Vivek Pandey	
- * 
- */
 package com.sun.xml.rpc.processor.modeler.wsdl;
 
 import java.util.HashMap;
@@ -52,10 +46,9 @@ import com.sun.xml.rpc.wsdl.document.schema.SchemaConstants;
 import com.sun.xml.rpc.wsdl.framework.AbstractDocument;
 
 /**
+ * JAXRPC 1.1 specific SchemaAnalyzer
  * @author JAX-RPC Development Team
- *
- * To change this generated comment go to 
- * Window>Preferences>Java>Code Generation>Code and Comments
+ * @author Vivek Pandey
  */
 public class SchemaAnalyzer11 extends SchemaAnalyzerBase {
 

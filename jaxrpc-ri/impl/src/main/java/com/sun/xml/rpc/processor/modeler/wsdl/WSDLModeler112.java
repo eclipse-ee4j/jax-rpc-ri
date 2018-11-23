@@ -24,10 +24,8 @@ import com.sun.xml.rpc.processor.modeler.JavaSimpleTypeCreator;
 import com.sun.xml.rpc.wsdl.document.WSDLDocument;
 
 /**
+ * WSDLModeler for JAXRPC version 1.1.2
  * @author Vivek Pandey
- *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class WSDLModeler112 extends WSDLModelerBase {
 

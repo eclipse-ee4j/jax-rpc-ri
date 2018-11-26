@@ -51,8 +51,9 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
      * @param _options
      * @param _conflictingClassNames
      * @param _javaTypes
-     * @return
+     * @return a {@link J2EESchemaAnalyzer111}
      */
+    @Override
     protected SchemaAnalyzerBase getSchemaAnalyzerInstance(   
         WSDLDocument document,
         WSDLModelInfo _modelInfo,
@@ -68,16 +69,19 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
             _javaTypes);
     }
 
+    @Override
     protected String getServiceInterfaceName(
         QName serviceQName,
         com.sun.xml.rpc.wsdl.document.Service wsdlService) {
         return helper.getServiceInterfaceName(serviceQName, wsdlService);
     }
 
+    @Override
     protected String getJavaNameOfPort(QName portQName) {
         return helper.getJavaNameOfPort(portQName);
     }
 
+    @Override
     protected void setJavaOperationNameProperty(Message inputMessage) {
         helper.setJavaOperationNameProperty(inputMessage);
     }
@@ -88,6 +92,7 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
      * java methods.  Since we are retro-fitting the mapping information, we have to force
      * jaxrpc to create the explicit context, i.e. handling soap headerfault.
      */
+    @Override
     protected boolean useExplicitServiceContextForDocLit(Message inputMessage) {
         return helper.useExplicitServiceContextForDocLit(inputMessage);
     }
@@ -97,6 +102,7 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
      * java methods.  Since we are retro-fitting the mapping information, we have to force
      * jaxrpc to create the explicit context, i.e. handling soap headerfault.
      */
+    @Override
     protected boolean useExplicitServiceContextForRpcLit(Message inputMessage) {
         return helper.useExplicitServiceContextForRpcLit(inputMessage);
     }
@@ -107,26 +113,32 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
      * java methods.  Since we are retro-fitting the mapping information, we have to force
      * jaxrpc to create the explicit context, i.e. handling soap headerfault.
      */
+    @Override
     protected boolean useExplicitServiceContextForRpcEncoded(Message inputMessage) {
         return helper.useExplicitServiceContextForRpcEncoded(inputMessage);
     }
 
+    @Override
     protected boolean isUnwrappable(Message inputMessage) {
         return helper.isUnwrappable(inputMessage);
     }
 
+    @Override
     protected void setCurrentPort(Port port) {
         helper.setCurrentPort(port);
     }
 
+    @Override
     protected String getJavaNameOfSEI(Port port) {
         return helper.getJavaNameOfSEI(port);
     }
 
+    @Override
     public LiteralType getElementTypeToLiteralType(QName elementType) {        
         return helper.getElementTypeToLiteralType(elementType);
     }
     
+    @Override
     protected AbstractType verifyResultType(
         AbstractType type,
         Operation operation) {
@@ -134,6 +146,7 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
         return helper.verifyResultType(type, operation);    
     }
 
+    @Override
     protected AbstractType verifyParameterType(
         AbstractType type,
         String partName,
@@ -142,18 +155,22 @@ public class J2EEModeler111 extends WSDLModeler111 implements J2EEModelerIf {
         return helper.verifyParameterType(type, partName, operation);
     }
 
+    @Override
     protected void postProcessSOAPOperation(Operation operation) {
         helper.postProcessSOAPOperation(operation);
     }
 
+    @Override
     protected WSDLExceptionInfo getExceptionInfo(Fault fault) {
         return helper.getExceptionInfo(fault);
     }
 
+    @Override
     protected void setSOAPUse() {
         helper.setSOAPUse();
     }
 
+    @Override
     protected String getJavaNameForOperation(Operation operation) {
         return helper.getJavaNameForOperation(operation);
     }

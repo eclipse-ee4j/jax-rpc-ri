@@ -50,7 +50,7 @@ import com.sun.xml.rpc.wsdl.document.soap.SOAPStyle;
 
 /**
  * @author  Qingqing Ouyang
- * @version 
+ * @version 1.1.5
  */
 public class ServiceEndpointInterfaceMappingNode extends JaxRpcMappingNode {
 
@@ -65,8 +65,8 @@ public class ServiceEndpointInterfaceMappingNode extends JaxRpcMappingNode {
      *
      * @param parent node in the DOM tree 
      * @param nodeName name for the root element for this DOM tree fragment
-     * @param model jaxrpc model to write
      * @param config jaxrpc configuration
+     * @param port The {@link Port} to write the details of
      * @return the DOM tree top node
      */
     public Node write(

@@ -31,10 +31,8 @@ import com.sun.xml.rpc.processor.schema.TypeDefinitionComponent;
 import com.sun.xml.rpc.wsdl.framework.AbstractDocument;
 
 /**
+ * JAXRPC 1.1 specific SchemaAnalyzer
  * @author JAX-RPC Development Team
- *
- * To change this generated comment go to 
- * Window>Preferences>Java>Code Generation>Code and Comments
  */
 public class SchemaAnalyzer111 extends SchemaAnalyzer11 {
 

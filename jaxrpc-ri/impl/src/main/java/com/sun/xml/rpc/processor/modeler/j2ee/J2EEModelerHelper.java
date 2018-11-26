@@ -64,7 +64,7 @@ public class J2EEModelerHelper {
     /**
      * @param serviceQName
      * @param wsdlService
-     * @return
+     * @return The name of the service in the wsdl
      */
     protected String getServiceInterfaceName(
         QName serviceQName,

@@ -59,8 +59,8 @@ public class NamespaceHelper {
 
     /**
      * Push a BaseType during traversal of BaseType.
-     * @param bt  The BaseType being visited
-     * @return a new instnace of NamespaceHelper to be used to resolve
+     * @param ct  The {@link ComplexType }being visited
+     * @return a new instance of NamespaceHelper to be used to resolve
      * QName string to a QName instance
      */
     public NamespaceHelper push(ComplexType ct) {

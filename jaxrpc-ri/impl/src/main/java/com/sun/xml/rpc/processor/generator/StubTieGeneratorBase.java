@@ -313,13 +313,13 @@ public abstract class StubTieGeneratorBase extends GeneratorBase {
     /**
      * @param out
      */
-    protected void writeAttachmentHooks(IndentingWriter p) throws IOException{
+    protected void writeAttachmentHooks(IndentingWriter out) throws IOException{
     }
     
     /**
      * @param out
      */
-    protected void writeHooks(IndentingWriter p) throws IOException{
+    protected void writeHooks(IndentingWriter out) throws IOException{
     }
 
     protected void writeImports(IndentingWriter p) throws IOException {
@@ -476,9 +476,10 @@ public abstract class StubTieGeneratorBase extends GeneratorBase {
         }
     }
 
-    /**
-     * @param operation
-     * @return
+    /** 
+     * Checks if the {@link Operation} has an empty body
+     * @param operation the Operation to check
+     * @return The operation if it has an empty body, null otherwise
      */
     protected Operation operationHasEmptyBody(Operation operation) {
         return null;

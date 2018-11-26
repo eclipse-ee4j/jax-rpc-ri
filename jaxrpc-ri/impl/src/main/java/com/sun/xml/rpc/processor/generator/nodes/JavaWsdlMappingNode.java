@@ -41,8 +41,8 @@ import com.sun.xml.rpc.processor.model.Service;
 import com.sun.xml.rpc.processor.model.literal.LiteralStructuredType;
 
 /**
- * @author  Qingqing Ouyang
- * @version 
+ * @author  Qingqing Ouyang 
+ * @version 1.1.5
  */
 public class JavaWsdlMappingNode extends JaxRpcMappingNode {
 

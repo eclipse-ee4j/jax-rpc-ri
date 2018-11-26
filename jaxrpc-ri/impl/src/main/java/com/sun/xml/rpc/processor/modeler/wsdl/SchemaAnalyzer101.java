@@ -14,11 +14,6 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-/**
- * @author JAX-RPC Development Team
- * 
- * JAXRPC 1.0.1 specific SchemaAnalyzer
- */
 package com.sun.xml.rpc.processor.modeler.wsdl;
 
 import java.util.HashMap;
@@ -61,6 +56,10 @@ import com.sun.xml.rpc.wsdl.document.schema.BuiltInTypes;
 import com.sun.xml.rpc.wsdl.document.schema.SchemaConstants;
 import com.sun.xml.rpc.wsdl.framework.AbstractDocument;
 
+/**
+ * JAXRPC 1.0.1 specific SchemaAnalyzer
+ * @author JAX-RPC Development Team
+ */
 public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
 
     /**
@@ -79,6 +78,7 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
         super(document, modelInfo, options, conflictingClassNames, javaTypes);
     }
 
+    @Override
     protected SOAPType simpleSchemaTypeToSOAPType(
         SimpleTypeDefinitionComponent component,
         QName nameHint) {
@@ -380,11 +380,7 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
         }
     }
 
-    /**
-    * @param component
-    * @param nameHint
-    * @return
-    */
+    @Override
     protected LiteralType anonymousSimpleSchemaTypeToLiteralType(
         SimpleTypeDefinitionComponent component,
         QName nameHint,
@@ -418,28 +414,32 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
     }
 
     /**
-     * @return
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean isAttributeEnumeration(LiteralType attributeType) {
         return false;
     }
 
     /**
-     * @param attributeUse
-     * @return
+     * @return false
      */
+    @Override
     protected boolean isAttributeOptional(AttributeUseComponent attributeUse) {
         return false;
     }
 
     /**
-     * @param memberParticle
-     * @return
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean isParticleOptional(ParticleComponent memberParticle) {
         return false;
     }
 
+    @Override
     protected SOAPType listToSOAPType(
         SimpleTypeDefinitionComponent component,
         QName nameHint) {
@@ -450,6 +450,7 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
         return null;
     }
 
+    @Override
     protected LiteralType listToLiteralType(
         SimpleTypeDefinitionComponent component,
         QName nameHint) {
@@ -457,22 +458,28 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
     }
 
     /**
-     * @return
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean doWeHandleSimpleSchemaTypeDerivationByList() {
         return false;
     }
 
     /**
-     * @return
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean doWeHandleWildcard() {
         return false;
     }
 
     /**
-     * @return
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean doWeHandleComplexSchemaTypeExtensionBySimpleContent() {
         return false;
     }
@@ -480,13 +487,16 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
     /**
      * @param javaEnumType
      */
+    @Override
     protected void resolveEnumerationNamingConflictsFor(JavaEnumerationType javaEnumType) {
         resolveNamingConflictsFor(javaEnumType);
     }
 
-    /* (non-Javadoc)
-     * @see com.sun.xml.rpc.processor.modeler.wsdl.SchemaAnalyzerBase#makeMemberBoxedType()
+    /**
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean doMakeMemberBoxedType() {
         return false;
     }
@@ -713,9 +723,11 @@ public class SchemaAnalyzer101 extends SchemaAnalyzerBase {
 
     }
 
-    /* (non-Javadoc)
-     * @see com.sun.xml.rpc.processor.modeler.wsdl.SchemaAnalyzerBase#doWeHandleComplexSchemaTypeExtensionByComplexType()
+    /**
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean doWeHandleComplexSchemaTypeExtensionByComplexType() {
         return false;
     }

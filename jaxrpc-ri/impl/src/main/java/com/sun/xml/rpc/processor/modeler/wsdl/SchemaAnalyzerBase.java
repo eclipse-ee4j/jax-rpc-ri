@@ -1386,7 +1386,7 @@ public abstract class SchemaAnalyzerBase {
     /**
      * @param element
      * @param nameHint
-     * @return
+     * @return The SOAPType of the element
      */
     protected SOAPType getSOAPMemberType(
         ComplexTypeDefinitionComponent component,
@@ -2180,7 +2180,7 @@ public abstract class SchemaAnalyzerBase {
     }
 
     /**
-     * @return
+     * @return true for versions &gt;= 1.1, false for earlier ones
      */
     protected boolean doWeHandleSimpleSchemaTypeDerivationByList() {
         return true;
@@ -2188,7 +2188,7 @@ public abstract class SchemaAnalyzerBase {
 
     /**
      * @param component
-     * @return
+     * @return A LiteralType based on the name of the component
      */
     protected LiteralType handleIDIDREF(SimpleTypeDefinitionComponent component) {
         LiteralIDType baseType = new LiteralIDType(component.getName());
@@ -2205,7 +2205,7 @@ public abstract class SchemaAnalyzerBase {
      * @param component
      * @param nameHint
      * @param mappingNameHint Hint for J2EE mapping of anonymous simple type
-     * @return
+     * @return the appropriate LiteralType for the schema in the component
      */
     protected LiteralType anonymousSimpleSchemaTypeToLiteralType(
         SimpleTypeDefinitionComponent component,
@@ -2376,14 +2376,14 @@ public abstract class SchemaAnalyzerBase {
     }
 
     /**
-     * @return
+     * @return true for versions &gt;= 1.1, false otherwise
      */
     protected boolean doWeHandleComplexSchemaTypeExtensionByComplexType() {
         return true;
     }
 
     /**
-     * @return
+     * @return true for versions &gt;= 1.1, false otherwise
      */
     protected boolean doWeHandleComplexSchemaTypeExtensionBySimpleContent() {
         return true;
@@ -3051,7 +3051,7 @@ public abstract class SchemaAnalyzerBase {
     /**
      * bug fix: 4999385
      * @param attributeType
-     * @return
+     * @return false in versions &lt; 1.1.2
      */
     protected boolean doWeHandleAttributeTypeEnumeration(LiteralType attributeType) {
         return false;
@@ -3225,14 +3225,14 @@ public abstract class SchemaAnalyzerBase {
     }
 
     /**
-     * @return
+     * @return false in versions &lt; 1.1, true otherwise
      */
     protected boolean doMakeMemberBoxedType() {
         return true;
     }
 
     /**
-     * @return
+     * @return false in versions &lt; 1.1, true otherwise
      */
     protected boolean doWeHandleWildcard() {
         return true;
@@ -3240,14 +3240,15 @@ public abstract class SchemaAnalyzerBase {
 
     /**
      * @param memberParticle
-     * @return
+     * @return true if the particle can occur once or no times
      */
     protected boolean isParticleOptional(ParticleComponent memberParticle) {
         return memberParticle.occursZeroOrOne();
     }
 
     /**
-     * @return
+     * @param attributeType LiteralType to check
+     * @return true if type is {@link LiteralEnumerationType}
      */
     protected boolean isAttributeEnumeration(LiteralType attributeType) {
         return (attributeType instanceof LiteralEnumerationType);
@@ -3259,7 +3260,7 @@ public abstract class SchemaAnalyzerBase {
 
     /**
      * @param attributeUse
-     * @return
+     * @return true if attribute is not required and there is no default
      */
     protected boolean isAttributeOptional(AttributeUseComponent attributeUse) {
         return (

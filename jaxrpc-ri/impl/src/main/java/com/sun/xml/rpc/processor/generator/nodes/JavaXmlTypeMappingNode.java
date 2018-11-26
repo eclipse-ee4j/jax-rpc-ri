@@ -44,7 +44,7 @@ import com.sun.xml.rpc.processor.model.soap.SOAPStructureType;
 
 /**
  * @author  Qingqing Ouyang
- * @version 
+ * @version 1.1.5
  */
 public class JavaXmlTypeMappingNode extends JaxRpcMappingNode {
 

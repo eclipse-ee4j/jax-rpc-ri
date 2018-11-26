@@ -1568,6 +1568,7 @@ public class StubGenerator extends StubTieGeneratorBase {
         }
     }
 
+    @Override
     protected void writeReadBodyFaultElement(IndentingWriter p)
         throws IOException {
         boolean hasFaults = false;
@@ -1617,6 +1618,7 @@ public class StubGenerator extends StubTieGeneratorBase {
         p.pOln("}"); // method
     }
 
+    @Override
     protected void writeReadFirstBodyElementDefault(
         IndentingWriter p,
         String opCode)
@@ -1627,10 +1629,12 @@ public class StubGenerator extends StubTieGeneratorBase {
                 + "));");
     }
 
+    @Override
     protected boolean needsReadFirstBodyElementFor(Operation operation) {
         return operation.getResponse() != null;
     }
 
+    @Override
     protected void writeHandleEmptyBody(IndentingWriter p, Operation operation)
         throws IOException {
         p.pln("/*");
@@ -1641,6 +1645,7 @@ public class StubGenerator extends StubTieGeneratorBase {
         p.pOln("}");
     }
 
+    @Override
     public void writeGenericMethods(IndentingWriter p) throws IOException {
         super.writeGenericMethods(p);
         // generate encoding-related stuff
@@ -1686,6 +1691,7 @@ public class StubGenerator extends StubTieGeneratorBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.generator.StubTieGeneratorBase#writePreSendingHookMethod(com.sun.xml.rpc.processor.util.IndentingWriter)
      */
+    @Override
     protected void writePreSendingHookMethod(IndentingWriter p, List operations)
         throws IOException {
         p.plnI("protected void _preSendingHook(StreamingSenderState state) throws Exception {");
@@ -1714,6 +1720,7 @@ public class StubGenerator extends StubTieGeneratorBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.generator.StubTieGeneratorBase#writePostSendingHook(com.sun.xml.rpc.processor.util.IndentingWriter)
      */
+    @Override
     protected void writePostSendingHook(IndentingWriter p, List operations) throws IOException {
         p.pln();
         p.plnI("protected void _postSendingHook(StreamingSenderState state) throws Exception {");
@@ -1785,6 +1792,7 @@ public class StubGenerator extends StubTieGeneratorBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.generator.StubTieGeneratorBase#writeAttachmentHooks(com.sun.xml.rpc.processor.util.IndentingWriter)
      */
+    @Override
     protected void writeAttachmentHooks(IndentingWriter p) throws IOException {
         boolean generateGetNonExplicitAttachmentMethod = false;
         boolean generateAddNonExplicitAttachmentMethod = false;
@@ -1819,6 +1827,7 @@ public class StubGenerator extends StubTieGeneratorBase {
         }
     }
 
+    @Override
     protected void writeHooks(IndentingWriter p) throws IOException {
         Iterator iter = ToolPluginFactory.getInstance().getExtensions(
             ToolPluginConstants.WSCOMPILE_PLUGIN,
@@ -1872,6 +1881,7 @@ public class StubGenerator extends StubTieGeneratorBase {
         p.pln();
     }
 
+    @Override
     protected void writeStatic(IndentingWriter p) throws IOException {
         // plugins write their static code
         Iterator iter = ToolPluginFactory.getInstance().getExtensions(
@@ -1886,6 +1896,7 @@ public class StubGenerator extends StubTieGeneratorBase {
     /* (non-Javadoc)
      * @see com.sun.xml.rpc.processor.generator.StubTieGeneratorBase#operationHasEmptyBody(com.sun.xml.rpc.processor.model.Operation)
      */
+    @Override
     protected Operation operationHasEmptyBody(Operation operation) {
         if (operation.getResponse() != null
                 && operation.getResponse().getBodyBlockCount() == 0) {

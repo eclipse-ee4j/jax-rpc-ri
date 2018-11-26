@@ -397,6 +397,7 @@ public abstract class MapBase implements Map {
 							return ((Entry) i.next()).getKey();
 						}
 
+                                                @Override
 						public void remove() {
 							i.remove();
 						}
@@ -454,6 +455,7 @@ public abstract class MapBase implements Map {
 							return ((Entry) i.next()).getValue();
 						}
 
+                                                @Override
 						public void remove() {
 							i.remove();
 						}
@@ -464,6 +466,7 @@ public abstract class MapBase implements Map {
 					return MapBase.this.size();
 				}
 
+                                @Override
 				public boolean contains(Object v) {
 					return MapBase.this.containsValue(v);
 				}
@@ -512,6 +515,7 @@ public abstract class MapBase implements Map {
 	 * @param o object to be compared for equality with this map.
 	 * @return <tt>true</tt> if the specified object is equal to this map.
 	 */
+        @Override
 	public boolean equals(Object o) {
 		if (o == this)
 			return true;
@@ -558,11 +562,12 @@ public abstract class MapBase implements Map {
 	 * up the results.
 	 *
 	 * @return the hash code value for this map.
-	 * @see Map.Entry#hashCode()
+	 * @see java.util.Map.Entry#hashCode()
 	 * @see Object#hashCode()
 	 * @see Object#equals(Object)
 	 * @see Set#equals(Object)
 	 */
+        @Override
 	public int hashCode() {
 		int h = 0;
 		Iterator i = entrySet().iterator();
@@ -590,6 +595,7 @@ public abstract class MapBase implements Map {
 	 *
 	 * @return a String representation of this map.
 	 */
+        @Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("{");
@@ -620,6 +626,7 @@ public abstract class MapBase implements Map {
 	 *
 	 * @return a shallow copy of this map.
 	 */
+        @Override
 	protected Object clone() throws CloneNotSupportedException {
 		MapBase result = (MapBase) super.clone();
 		result.keySet = null;
@@ -659,6 +666,7 @@ public abstract class MapBase implements Map {
 			return oldValue;
 		}
 
+                @Override
 		public boolean equals(Object o) {
 			if (!(o instanceof Map.Entry))
 				return false;
@@ -666,12 +674,14 @@ public abstract class MapBase implements Map {
 			return eq(key, e.getKey()) && eq(value, e.getValue());
 		}
 
+                @Override
 		public int hashCode() {
 			Object v;
 			return ((key == null) ? 0 : key.hashCode())
 				^ ((value == null) ? 0 : value.hashCode());
 		}
 
+                @Override
 		public String toString() {
 			return key + "=" + value;
 		}

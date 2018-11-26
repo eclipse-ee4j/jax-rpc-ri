@@ -52,9 +52,8 @@ import com.sun.xml.rpc.wsdl.framework.Extensible;
 import com.sun.xml.rpc.wsdl.framework.Extension;
 
 /**
- * @author JAX-RPC Development Team
- *
  * WSDLModeler for JAXRPC version 1.0.3
+ * @author JAX-RPC Development Team 
  */
 public class WSDLModeler103 extends WSDLModelerBase {
 
@@ -66,14 +65,20 @@ public class WSDLModeler103 extends WSDLModelerBase {
         super(modelInfo, options);
     }
 
+    @Override
     protected void setUnwrapped(LiteralStructuredType type) {
     }
 
-    //JAXRPC 1.0.3 doesn't support RPC/Literal
+    /**
+     * {@inheritDoc}
+     * @return null as JAXRPC 1.0.3 doesn't support RPC/Literal
+     */
+    @Override
     protected Operation processSOAPOperationRPCLiteralStyle() {
         return null;
     }
 
+    @Override
     protected java.util.List processParameterOrder(
         Set inputParameterNames,
         Set outputParameterNames,
@@ -250,9 +255,9 @@ public class WSDLModeler103 extends WSDLModelerBase {
     }
     
     /**
-     * @param response
-     * @param duplicateNames
+     * {@inheritDoc}
      */
+    @Override
     protected void handleLiteralSOAPFault(
         Response response,
         Set duplicateNames) {
@@ -273,11 +278,12 @@ public class WSDLModeler103 extends WSDLModelerBase {
      * Returns soapbinding:fault name. If null then gives warning for wsi R2721 and uses 
      * wsdl:fault name.
      * 
-     * @param faultPartName - to be used by versions < 1.1
+     * @param faultPartName - to be used by versions &lt; 1.1
      * @param soapFaultName
      * @param bindFaultName
-     * @return
+     * @return faultPartName
      */
+    @Override
     protected String getFaultName(
         String faultPartName,
         String soapFaultName,
@@ -307,6 +313,7 @@ public class WSDLModeler103 extends WSDLModelerBase {
     /* Fix for bug: 4913508, basically reverts bug 4847438 fix
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#createJavaException(com.sun.xml.rpc.processor.model.Fault, com.sun.xml.rpc.processor.model.Port, java.lang.String)
      */
+    @Override
     protected boolean createJavaException(
         Fault fault,
         Port port,
@@ -410,10 +417,12 @@ public class WSDLModeler103 extends WSDLModelerBase {
         return true;
     }
 
-    /* 
-     * Overried this method, 1.0.3 does not process header fault
+    /**
+     * {@inheritDoc}
+     * Overridden this method, 1.0.3 does not process header fault
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#processHeaderFaults(com.sun.xml.rpc.wsdl.document.soap.SOAPHeader, com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase.ProcessSOAPOperationInfo, com.sun.xml.rpc.processor.model.Response, java.util.Set)
      */
+    @Override
     protected void processHeaderFaults(
         SOAPHeader header,
         ProcessSOAPOperationInfo info,
@@ -421,10 +430,12 @@ public class WSDLModeler103 extends WSDLModelerBase {
         Set duplicateNames) {
     }
     
-    /* 
+    /**
+     * {@inheritDoc}
      * Only JAXRPC SI 1.1.2 and onwards support wsdl mime extension and swaref.
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#getAnyExtensionOfType(com.sun.xml.rpc.wsdl.framework.Extensible, java.lang.Class)
      */
+    @Override
     protected Extension getAnyExtensionOfType(
             Extensible extensible,
             Class type) {

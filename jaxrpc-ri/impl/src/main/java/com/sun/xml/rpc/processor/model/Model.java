@@ -147,7 +147,7 @@ public class Model extends ModelObject
     }
     
     /**
-     * @return
+     * @return the source of the Model
      */
     public String getSource() {
         return source;

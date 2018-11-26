@@ -52,9 +52,8 @@ import com.sun.xml.rpc.wsdl.framework.Extensible;
 import com.sun.xml.rpc.wsdl.framework.Extension;
 
 /**
- * @author JAX-RPC Development Team
- *
  * WSDLModeler for JAXRPC version 1.0.1
+ * @author JAX-RPC Development Team
  */
 public class WSDLModeler101 extends WSDLModelerBase {
 
@@ -66,11 +65,16 @@ public class WSDLModeler101 extends WSDLModelerBase {
         super(modelInfo, options);
     }
 
-    //  JAXRPC 1.0.1 doesn't support RPC/Literal
+    /**
+     * JAXRPC 1.0.1 doesn't support RPC/Literal
+     * @return null
+     */
+    @Override
     protected Operation processSOAPOperationRPCLiteralStyle() {
         return null;
     }
 
+    @Override
     protected void setUnwrapped(LiteralStructuredType type) {
     }
 
@@ -80,6 +84,7 @@ public class WSDLModeler101 extends WSDLModelerBase {
      * @param message Input or output message, equivalent to wsdl:message
      * @return iterator over MessagePart
      */
+    @Override
     protected List getMessageParts(
         SOAPBody body,
         com.sun.xml.rpc.wsdl.document.Message message, 
@@ -100,6 +105,7 @@ public class WSDLModeler101 extends WSDLModelerBase {
         return parts;
     }
 
+    @Override
     protected java.util.List processParameterOrder(
         Set inputParameterNames,
         Set outputParameterNames,
@@ -270,10 +276,9 @@ public class WSDLModeler101 extends WSDLModelerBase {
     }
 
     /**
-     * @param response
-     * @param duplicateNames
-     * @param faultNames
+     * {@inheritDoc}
      */
+    @Override
     protected void handleLiteralSOAPFault(
         Response response,
         Set duplicateNames) {
@@ -294,12 +299,13 @@ public class WSDLModeler101 extends WSDLModelerBase {
      * Returns soapbinding:fault name. If null then gives warning for wsi R2721 and uses 
      * wsdl:fault name.
      * 
-     * @param faultPartName - to be used by versions < 1.1
+     * @param faultPartName - to be used by versions &lt; 1.1
      * @param soapFaultName
      * @param bindFaultName
      * @param faultMessageName 
-     * @return
+     * @return faultPartName
      */
+    @Override
     protected String getFaultName(
         String faultPartName,
         String soapFaultName,
@@ -329,6 +335,7 @@ public class WSDLModeler101 extends WSDLModelerBase {
     /* Fix for bug: 4913508, basically reverts bug 4847438 fix
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#createJavaException(com.sun.xml.rpc.processor.model.Fault, com.sun.xml.rpc.processor.model.Port, java.lang.String)
      */
+    @Override
     protected boolean createJavaException(
         Fault fault,
         Port port,
@@ -432,10 +439,13 @@ public class WSDLModeler101 extends WSDLModelerBase {
         return true;
     }
     
-    /* 
-     * Overried this method, 1.0.1 does not process header fault
-     * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#processHeaderFaults(com.sun.xml.rpc.wsdl.document.soap.SOAPHeader, com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase.ProcessSOAPOperationInfo, com.sun.xml.rpc.processor.model.Response, java.util.Set)
+    /**
+     * Overridden this method, 1.0.1 does not process header fault
+     * {@inheritDoc}
+     * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#processHeaderFaults(com.sun.xml.rpc.wsdl.document.soap.SOAPHeader, 
+     * com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase.ProcessSOAPOperationInfo, com.sun.xml.rpc.processor.model.Response, java.util.Set)
      */
+    @Override
     protected void processHeaderFaults(
         SOAPHeader header,
         ProcessSOAPOperationInfo info,
@@ -443,26 +453,33 @@ public class WSDLModeler101 extends WSDLModelerBase {
         Set duplicateNames) {
     }
     
-    /* 
+    /**
+     * {@inheritDoc}
      * Only JAXRPC SI 1.1.2 and onwards support wsdl mime extension and swaref.
      * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#getAnyExtensionOfType(com.sun.xml.rpc.wsdl.framework.Extensible, java.lang.Class)
      */
+    @Override
     protected Extension getAnyExtensionOfType(
             Extensible extensible,
             Class type) {
         return getExtensionOfType(extensible, type);
     }       
 
-    /* (non-Javadoc)
-     * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#isBoundToSOAPBody(com.sun.xml.rpc.wsdl.document.MessagePart)
+    /**
+     * {@inheritDoc}
+     * @return true
      */
+    @Override
     protected boolean isBoundToSOAPBody(MessagePart part) {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see com.sun.xml.rpc.processor.modeler.wsdl.WSDLModelerBase#isBoundToMimeContent(com.sun.xml.rpc.wsdl.document.MessagePart)
+    /**
+     * 
+     * {@inheritDoc}
+     * @return false
      */
+    @Override
     protected boolean isBoundToMimeContent(MessagePart part) {        
         return false;
     }

@@ -120,14 +120,14 @@ import java.util.Set;
  * alternates holding keys and values.  (This has better locality for large
  * tables than does using separate arrays.)  For many JRE implementations
  * and operation mixes, this class will yield better performance than
- * {@link HashMap} (which uses <i>chaining</i> rather than linear-probing). 
+ * {@link java.util.HashMap} (which uses <i>chaining</i> rather than linear-probing). 
  *
  * @see     System#identityHashCode(Object)
  * @see     Object#hashCode()
- * @see     Collection
- * @see	    Map
- * @see	    HashMap
- * @see	    TreeMap
+ * @see     java.util.Collection
+ * @see	    java.util.Map
+ * @see	    java.util.HashMap
+ * @see	    java.util.TreeMap
  * @author  Doug Lea and Josh Bloch
  * @since   1.4
  */
@@ -280,6 +280,7 @@ public class IdentityMap
 	 *
 	 * @return the number of key-value mappings in this map.
 	 */
+        @Override
 	public int size() {
 		return size;
 	}
@@ -291,6 +292,7 @@ public class IdentityMap
 	 * @return <tt>true</tt> if this identity hash map contains no key-value
 	 *         mappings.
 	 */
+        @Override
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -349,6 +351,7 @@ public class IdentityMap
 	 *          in this map. 
 	 * @see     #containsValue(Object)
 	 */
+        @Override
 	public boolean containsKey(Object key) {
 		Object k = maskNull(key);
 		Object[] tab = table;
@@ -373,6 +376,7 @@ public class IdentityMap
 	 *         specified object reference.
 	 * @see     #containsKey(Object)
 	 */
+        @Override
 	public boolean containsValue(Object value) {
 		Object[] tab = table;
 		for (int i = 1; i < tab.length; i += 2)
@@ -420,6 +424,7 @@ public class IdentityMap
 	 * @see     #get(Object)
 	 * @see     #containsKey(Object)
 	 */
+        @Override
 	public Object put(Object key, Object value) {
 		Object k = maskNull(key);
 		Object[] tab = table;
@@ -491,6 +496,7 @@ public class IdentityMap
 	 * @param t mappings to be stored in this map.
 	 * @throws NullPointerException if the specified map is null.
 	 */
+        @Override
 	public void putAll(Map t) {
 		int n = t.size();
 		if (n == 0)
@@ -513,6 +519,7 @@ public class IdentityMap
 	 *	       also indicate that the map previously associated <tt>null</tt>
 	 *	       with the specified key.)
 	 */
+        @Override
 	public Object remove(Object key) {
 		Object k = maskNull(key);
 		Object[] tab = table;
@@ -609,6 +616,7 @@ public class IdentityMap
 	/**
 	 * Removes all mappings from this map.
 	 */
+        @Override
 	public void clear() {
 		modCount++;
 		Object[] tab = table;
@@ -634,6 +642,7 @@ public class IdentityMap
 	 * @return <tt>true</tt> if the specified object is equal to this map.
 	 * @see Object#equals(Object)
 	 */
+        @Override
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true;
@@ -677,6 +686,7 @@ public class IdentityMap
 	 * @see Object#equals(Object)
 	 * @see #equals(Object)
 	 */
+        @Override
 	public int hashCode() {
 		int result = 0;
 		Object[] tab = table;
@@ -697,6 +707,7 @@ public class IdentityMap
 	 *
 	 * @return a shallow copy of this map.
 	 */
+        @Override
 	public Object clone() {
 		try {
 			IdentityMap t = (IdentityMap) super.clone();
@@ -740,6 +751,7 @@ public class IdentityMap
 			return lastReturnedIndex;
 		}
 
+                @Override
 		public void remove() {
 			if (lastReturnedIndex == -1)
 				throw new IllegalStateException();
@@ -874,6 +886,7 @@ public class IdentityMap
 			return oldValue;
 		}
 
+                @Override
 		public boolean equals(Object o) {
 			if (!(o instanceof Map.Entry))
 				return false;
@@ -881,11 +894,13 @@ public class IdentityMap
 			return e.getKey() == getKey() && e.getValue() == getValue();
 		}
 
+                @Override
 		public int hashCode() {
 			return System.identityHashCode(getKey())
 				^ System.identityHashCode(getValue());
 		}
 
+                @Override
 		public String toString() {
 			return getKey() + "=" + getValue();
 		}
@@ -939,6 +954,7 @@ public class IdentityMap
 	 * @see Object#equals(Object)
 	 * @see System#identityHashCode(Object)
 	 */
+        @Override
 	public Set keySet() {
 		Set ks = keySet;
 		if (ks != null)
@@ -954,9 +970,11 @@ public class IdentityMap
 		public int size() {
 			return size;
 		}
+                @Override
 		public boolean contains(Object o) {
 			return containsKey(o);
 		}
+                @Override
 		public boolean remove(Object o) {
 			int oldSize = size;
 			IdentityMap.this.remove(o);
@@ -967,6 +985,7 @@ public class IdentityMap
 		 * the former contains an optimization that results in incorrect
 		 * behavior when c is a smaller "normal" (non-identity-based) Set.
 		 */
+                @Override
 		public boolean removeAll(Collection c) {
 			boolean modified = false;
 			for (Iterator i = iterator(); i.hasNext();) {
@@ -977,9 +996,11 @@ public class IdentityMap
 			}
 			return modified;
 		}
+                @Override
 		public void clear() {
 			IdentityMap.this.clear();
 		}
+                @Override
 		public int hashCode() {
 			int result = 0;
 			for (Iterator i = iterator(); i.hasNext();)
@@ -1009,6 +1030,7 @@ public class IdentityMap
 	 *
 	 * @return a collection view of the values contained in this map.
 	 */
+        @Override
 	public Collection values() {
 		Collection vs = values;
 		if (vs != null)
@@ -1024,9 +1046,11 @@ public class IdentityMap
 		public int size() {
 			return size;
 		}
+                @Override
 		public boolean contains(Object o) {
 			return containsValue(o);
 		}
+                @Override
 		public boolean remove(Object o) {
 			for (Iterator i = iterator(); i.hasNext();) {
 				if (i.next() == o) {
@@ -1090,12 +1114,14 @@ public class IdentityMap
 		public Iterator iterator() {
 			return new EntryIterator();
 		}
+                @Override
 		public boolean contains(Object o) {
 			if (!(o instanceof Map.Entry))
 				return false;
 			Map.Entry entry = (Map.Entry) o;
 			return containsMapping(entry.getKey(), entry.getValue());
 		}
+                @Override
 		public boolean remove(Object o) {
 			if (!(o instanceof Map.Entry))
 				return false;
@@ -1105,6 +1131,7 @@ public class IdentityMap
 		public int size() {
 			return size;
 		}
+                @Override
 		public void clear() {
 			IdentityMap.this.clear();
 		}
@@ -1113,6 +1140,7 @@ public class IdentityMap
 		 * the former contains an optimization that results in incorrect
 		 * behavior when c is a smaller "normal" (non-identity-based) Set.
 		 */
+                @Override
 		public boolean removeAll(Collection c) {
 			boolean modified = false;
 			for (Iterator i = iterator(); i.hasNext();) {
@@ -1124,12 +1152,14 @@ public class IdentityMap
 			return modified;
 		}
 
+                @Override
 		public Object[] toArray() {
 			Collection c = new ArrayList(size());
 			for (Iterator i = iterator(); i.hasNext();)
 				c.add(new MapBase.SimpleEntry((Map.Entry) i.next()));
 			return c.toArray();
 		}
+                @Override
 		public Object[] toArray(Object a[]) {
 			Collection c = new ArrayList(size());
 			for (Iterator i = iterator(); i.hasNext();)

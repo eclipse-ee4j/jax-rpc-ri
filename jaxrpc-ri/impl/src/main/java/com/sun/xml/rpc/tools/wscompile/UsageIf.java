@@ -25,20 +25,22 @@ import com.sun.xml.rpc.util.localization.Localizable;
 public interface UsageIf {
     
     /**
-     * @return
+     * @return how to use the options of wscompile
      */
     public Localizable getOptionsUsage();
     
     /**
-     * @return
+     * @return how to use the wscompile features
      */
     public Localizable getFeaturesUsage();
+    
     /**
-     * @return
+     * @return intals of wscompile
      */
     public Localizable getInternalUsage();
+    
     /**
-     * @return
+     * @return some examples of how to use wscompile
      */
     public Localizable getExamplesUsage();
     

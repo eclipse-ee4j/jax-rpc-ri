@@ -857,7 +857,7 @@ public class CompileTool extends ToolBase
     }
     
     /**
-     * @return
+     * @return the JAX-RPC version, 1.1.3 if none specified as target
      */
     protected String getSourceVersion() {
         if (targetVersion == null) {

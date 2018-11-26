@@ -33,7 +33,7 @@ import java.io.UnsupportedEncodingException;
  * generated document is well-formed and, if required, valid.
  *
  * <p> <b>Note:</b> This class is incomplete.  In the next draft it will be
- * extended to more closely mimic {@link XMLScanner}, and to support output to
+ * extended to more closely mimic the Xerces XMLScanner, and to support output to
  * both SAX streams and DOM documents.  </p>
  *
  *
@@ -553,7 +553,7 @@ public class XmlWriter {
 	/**
 	 * Writes some character data, skipping quoting.  </p>
 	 *
-	 * @param  cbuf   Buffer containing the character data to be written
+	 * @param  buf   Buffer containing the character data to be written
 	 * @param  off    The offset of the data to be written
 	 * @param  len    The length of the data to be written
 	 *
@@ -599,7 +599,7 @@ public class XmlWriter {
 	/**
 	 * Writes an empty leaf element.  </p>
 	 *
-	 * @param  The name to be used in the empty-element tag
+	 * @param name The name to be used in the empty-element tag
 	 */
 	public void leaf(String name) throws IOException {
 		leaf(name, null);

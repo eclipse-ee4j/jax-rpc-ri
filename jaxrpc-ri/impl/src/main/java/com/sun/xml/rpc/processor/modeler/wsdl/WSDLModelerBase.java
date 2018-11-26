@@ -365,12 +365,13 @@ public abstract class WSDLModelerBase implements Modeler {
     }
 
     /**
+     * Gets the appropriate Schema Analyzer for the wsdl
      * @param document
      * @param _modelInfo
      * @param _options
      * @param _conflictingClassNames
      * @param _javaTypes
-     * @return
+     * @return the schema analyzer
      */
     protected abstract SchemaAnalyzerBase getSchemaAnalyzerInstance(
         WSDLDocument document,
@@ -471,7 +472,7 @@ public abstract class WSDLModelerBase implements Modeler {
     /**
      * @param serviceQName
      * @param wsdlService
-     * @return
+     * @return The full name of the class  for the wsdl service
      */
     protected String getServiceInterfaceName(
         QName serviceQName,
@@ -2685,7 +2686,7 @@ public abstract class WSDLModelerBase implements Modeler {
 
     /**
      * @param part
-     * @return
+     * @return true if the message part is a wsdl mime type
      */
     protected boolean isBoundToMimeContent(MessagePart part) {
         if((part != null) && part.getBindingExtensibilityElementKind() == MessagePart.WSDL_MIME_BINDING)
@@ -2695,7 +2696,7 @@ public abstract class WSDLModelerBase implements Modeler {
 
     /**
      * @param part
-     * @return
+     * @return true if the message part is the soap body
      */
     protected boolean isBoundToSOAPBody(MessagePart part) {
         if((part != null) && part.getBindingExtensibilityElementKind() == MessagePart.SOAP_BODY_BINDING)
@@ -2704,8 +2705,8 @@ public abstract class WSDLModelerBase implements Modeler {
     }
 
     /**
-     * @param output
-     * @return
+     * @param extensible
+     * @return an iterator of extentions that are {@link SoapHeader}
      */
     private Iterator getHeaderExtensions(Extensible extensible) {
         List headerList = new ArrayList();
@@ -2759,7 +2760,6 @@ public abstract class WSDLModelerBase implements Modeler {
     /**
      * @param response
      * @param duplicateNames
-     * @param faultNames
      */
     protected void handleLiteralSOAPFault(
         Response response,
@@ -3244,7 +3244,8 @@ public abstract class WSDLModelerBase implements Modeler {
      * @param faultPartName - to be used by versions < 1.1
      * @param soapFaultName
      * @param bindFaultName
-     * @return
+     * @param faultMessageName
+     * @return The faultMessageName if not overridden by a subclass
      */
     protected String getFaultName(
         String faultPartName,

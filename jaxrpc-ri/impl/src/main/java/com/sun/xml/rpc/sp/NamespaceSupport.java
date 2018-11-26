@@ -376,8 +376,6 @@ public class NamespaceSupport {
      * method with an argument of "".</p>
      *
      * @param uri The Namespace URI.
-     * @param isAttribute true if this prefix is for an attribute
-     *        (and the default Namespace is not allowed).
      * @return One of the prefixes currently mapped to the URI supplied,
      *         or null if none is mapped or if the URI is assigned to
      *         the default Namespace.

@@ -318,7 +318,7 @@ public abstract class StreamingParser {
      *          Whether an appropriate article ("a", "an", "some", or "the") is
      *          to be prepended to the description string
      *
-     * @returns  A string describing the given parser state.
+     * @return  A string describing the given parser state.
      */
     public static String describe(
         int state,
@@ -395,10 +395,11 @@ public abstract class StreamingParser {
      *          Whether an appropriate article ("a", "an", "some", or "the") is
      *          to be prepended to the description string
      *
-     * @returns  A string describing the given parser state.
+     * @return  A string describing the given parser state.
      */
     public abstract String describe(boolean articleNeeded);
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("[StreamingParser");
         if (systemId() != null)

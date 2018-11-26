@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 
 /**
  * @author  Qingqing Ouyang
- * @version 
+ * @version 1.1.5
  */
 public class PackageMappingNode extends JaxRpcMappingNode {
 

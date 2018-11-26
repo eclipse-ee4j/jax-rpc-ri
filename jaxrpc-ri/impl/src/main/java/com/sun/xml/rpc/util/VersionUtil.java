@@ -96,7 +96,7 @@ public final class VersionUtil implements Version {
 	/**
 	 * Check if the version is JAXRPC 1.01.
 	 * @param version check if the required version is 1.01
-	 * @return boolean ture if 1.01, flase otherwise
+	 * @return boolean ture if 1.01, false otherwise
 	 */
 	public static boolean isVersion101(String version) {
 		return JAXRPC_VERSION_101.equals(version);
@@ -106,16 +106,16 @@ public final class VersionUtil implements Version {
 	 * Check if the version is JAXRPC 1.03
 	 * 
 	 * @param version version check if the required version is 1.03
-	 * @return boolean ture if 1.03, flase otherwise
+	 * @return boolean ture if 1.03, false otherwise
 	 */
 	public static boolean isVersion103(String version) {
 		return JAXRPC_VERSION_103.equals(version);
 	}
 
 	/**
-	     * @param version
-	     * @return
-	     */
+	 * @param version
+	 * @return true if the JAX-RPC version is 1.1
+	 */
 	public static boolean isVersion11(String version) {
 		return JAXRPC_VERSION_11.equals(version);
 	}
@@ -130,8 +130,9 @@ public final class VersionUtil implements Version {
                JAXRPC_VERSION_112_02.equals(version);
     } 
 	/**
-	 * @param version
-	 * @return
+         * Checks if the version string is a
+	 * @param version String to check
+	 * @return true if a valid JAX-RPC version, false otherwise
 	 */
 	public static boolean isValidVersion(String version) {
 		return isVersion101(version)
@@ -151,6 +152,7 @@ public final class VersionUtil implements Version {
 	 * c - minor minor version
 	 * d - patch version
 	 * 
+         * @param version String to check
 	 * @return int[] Canonical version number
 	 */
 	public static int[] getCanonicalVersion(String version) {

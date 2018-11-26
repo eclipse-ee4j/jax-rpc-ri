@@ -25,10 +25,9 @@ import com.sun.xml.rpc.processor.modeler.JavaSimpleTypeCreator;
 import com.sun.xml.rpc.wsdl.framework.AbstractDocument;
 
 /**
+ * JAXRPC 1.1.2 specific SchemaAnalyzer
  * @author Vivek Pandey
  *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class SchemaAnalyzer112 extends SchemaAnalyzer111 {
     /**

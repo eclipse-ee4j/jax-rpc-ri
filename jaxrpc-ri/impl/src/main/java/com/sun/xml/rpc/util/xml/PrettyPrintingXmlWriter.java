@@ -33,7 +33,7 @@ import java.io.UnsupportedEncodingException;
  * generated document is well-formed and, if required, valid.
  *
  * <p> <b>Note:</b> This class is incomplete.  In the next draft it will be
- * extended to more closely mimic {@link XMLScanner}, and to support output to
+ * extended to more closely mimic the Xerces XMLScanner, and to support output to
  * both SAX streams and DOM documents.  </p>
  *
  *
@@ -563,10 +563,10 @@ public class PrettyPrintingXmlWriter {
 	 * @throws  IOException
 	 *          If an I/O error occurs
 	 */
-	public void charsUnquoted(char[] buf, int off, int len)
+	public void charsUnquoted(char[] cbuf, int off, int len)
 		throws IOException {
 		finishStart();
-		out.write(buf, off, len);
+		out.write(cbuf, off, len);
 		writtenChars = true;
 	}
 
@@ -602,7 +602,7 @@ public class PrettyPrintingXmlWriter {
 	/**
 	 * Writes an empty leaf element.  </p>
 	 *
-	 * @param  The name to be used in the empty-element tag
+	 * @param name The name to be used in the empty-element tag
 	 */
 	public void leaf(String name) throws IOException {
 		leaf(name, null);

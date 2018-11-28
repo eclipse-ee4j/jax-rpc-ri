@@ -16,15 +16,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>jakarta.xml.rpc</groupId>
-        <artifactId>jakarta.xml.rpc-parent</artifactId>
+        <groupId>com.sun.xml.rpc</groupId>
+        <artifactId>jaxrpc-parent</artifactId>
         <version>1.1.5-SNAPSHOT</version>
 	<relativePath>../../</relativePath>
     </parent>
     
-    <groupId>jakarta.xml.rpc</groupId>
-    <artifactId>jakarta.xml.rpc-installer</artifactId>
-    <name>JAX-RPC Installer</name>
+    <groupId>com.sun.xml.rpc</groupId>
+    <artifactId>jaxrpc-installer</artifactId>
+    <name>jaxrpc installer</name>
     <version>1.1.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -40,6 +40,10 @@
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.sun.xml.rpc.installer.Main</mainClass>
+                        </manifest>
                     </archive>
                 </configuration>
             </plugin>

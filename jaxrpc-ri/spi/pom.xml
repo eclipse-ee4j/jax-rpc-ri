@@ -19,12 +19,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>jakarta.xml.rpc</groupId>
-        <artifactId>jakarta.xml.rpc-parent</artifactId>
+        <groupId>com.sun.xml.rpc</groupId>
+        <artifactId>jaxrpc-parent</artifactId>
         <version>1.1.5-SNAPSHOT</version>
     </parent>
 
-    <groupId>jakarta.xml.rpc</groupId>
+    <groupId>com.sun.xml.rpc</groupId>
     <artifactId>jaxrpc-spi</artifactId>
     <packaging>jar</packaging>
 

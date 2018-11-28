@@ -22,12 +22,12 @@
         <version>1.0.5</version>
     </parent>
 
-    <groupId>jakarta.xml.rpc</groupId>
-    <artifactId>jakarta.xml.rpc-parent</artifactId>
+    <groupId>com.sun.xml.rpc</groupId>
+    <artifactId>jaxrpc-parent</artifactId>
     <version>1.1.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>JAXRPC Implementation Parent</name>
+    <name>jaxrpc implementation parent</name>
     <description>JAXRPC Reference Implementation</description>
     <url>https://github.com/eclipse-ee4j/jax-rpc-ri</url>
 

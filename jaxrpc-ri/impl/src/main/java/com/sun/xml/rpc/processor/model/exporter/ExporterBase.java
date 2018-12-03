@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019 Payara Services Ltd.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -40,11 +41,11 @@ import com.sun.xml.rpc.soap.SOAPVersion;
 import com.sun.xml.rpc.streaming.PrefixFactoryImpl;
 import com.sun.xml.rpc.streaming.XMLWriter;
 import com.sun.xml.rpc.streaming.XMLWriterException;
-import com.sun.xml.rpc.util.IdentityMap;
 import com.sun.xml.rpc.util.VersionUtil;
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
 import com.sun.xml.rpc.wsdl.document.soap.SOAPStyle;
 import com.sun.xml.rpc.wsdl.document.soap.SOAPUse;
+import java.util.IdentityHashMap;
 
 /**
  * @author JAX-RPC Development Team
@@ -64,7 +65,7 @@ public abstract class ExporterBase {
     }
     
     protected void initialize() {
-        obj2id = new IdentityMap();
+        obj2id = new IdentityHashMap();
         immutableObj2id = new HashMap();
         obj2serialize = new HashSet();
         obj2serializeStack = new Stack();

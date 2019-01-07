@@ -18,14 +18,14 @@
     <parent>
         <groupId>com.sun.xml.rpc</groupId>
         <artifactId>jaxrpc-parent</artifactId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.1.5</version>
 	<relativePath>../../</relativePath>
     </parent>
     
     <groupId>com.sun.xml.rpc</groupId>
     <artifactId>jaxrpc-installer</artifactId>
     <name>jaxrpc installer</name>
-    <version>1.1.5-SNAPSHOT</version>
+    <version>1.1.5</version>
     <packaging>jar</packaging>
 
     <build>

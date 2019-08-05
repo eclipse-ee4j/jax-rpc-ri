@@ -1,0 +1,12 @@
+remote_theme: jakartaee/jekyll-theme-jakarta-ee
+
+title: [Eclipse XML RPC]
+description: [Compatible implementation of Jakarta XML RPC specification]
+
+links:
+  source: https://github.com/eclipse-ee4j/jax-rpc-ri
+  #docs: docs/user-guide.html
+  javadocs: apidocs/
+  download: https://github.com/eclipse-ee4j/jax-rpc-ri/releases
+  mailinglist: https://accounts.eclipse.org/mailing-list/metro-dev
+  #faq: FAQ

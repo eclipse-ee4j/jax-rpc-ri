@@ -5,7 +5,7 @@ As required by the
 [Eclipse Foundation Technology Compatibility Kit License](https://www.eclipse.org/legal/tck.php),
 following is a summary of the TCK results for releases of Jakarta XML RPC.
 
-# 5.1 Certification Request
+# 1.1.5 Certification Request
 
 - [x] Organization Name ("Organization") and, if applicable, URL\
   Eclipse Foundation

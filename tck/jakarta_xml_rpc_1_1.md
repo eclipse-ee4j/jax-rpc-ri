@@ -14,7 +14,7 @@ following is a summary of the TCK results for releases of Jakarta XML RPC.
 - [x] Specification Name, Version and download URL\
    [Jakarta XML RPC 1.1](https://jakarta.ee/specifications/xml-rpc/1.1/)
 - [x] TCK Version, digital SHA-256 fingerprint and download URL\
-  [Jakarta XML RPC TCK 1.1.0](http://download.eclipse.org/ee4j/jakartaee-tck/jakartaee8-eftl/promoted/eclipse-xml-rpc-tck-1.1.0.zip), SHA-256: 610d7142cf269cc98ca2ad8de40d6ee18ceb5c2061c016487972aa6f6ed84f63
+  [Jakarta XML RPC TCK 1.1.0](http://download.eclipse.org/ee4j/jakartaee-tck/jakartaee8-eftl/promoted/eclipse-xml-rpc-tck-1.1.0.zip), SHA-256: 305a15a216b358a4f1d92711ba7bc45f8b648cb5a74f33fdeb15da09611a0084
 - [x] Public URL of TCK Results Summary\
   [TCK results summary](jakarta_xml_rpc_1_1.html)
 - [x] Any Additional Specification Certification Requirements\

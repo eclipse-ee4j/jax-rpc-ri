@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2002 International Business Machines Corp. 2002. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -21,8 +21,9 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
-import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -202,24 +203,26 @@ public class Factory implements java.io.Serializable {
         System.out.print("[Factory] ==> validate = " + validate);
 
         this.xmlFile = xmlFile;
-        DOMParser parser = new DOMParser();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             if (validate) {
-                parser.setEntityResolver(new EntityResolverRI());
-                parser.setFeature(
+                factory.setFeature(
                     "http://xml.org/sax/features/validation",
                     true);
             } else
-                parser.setFeature(
+                factory.setFeature(
                     "http://apache.org/xml/features/nonvalidating/load-external-dtd",
                     false);
-            parser.setFeature(
+            factory.setFeature(
                 "http://apache.org/xml/features/validation/schema",
                 true);
             // parser.setFeature("http://xml.org/sax/features/namespaces",true);
+            DocumentBuilder parser = factory.newDocumentBuilder();
+            if (validate) {
+                parser.setEntityResolver(new EntityResolverRI());
+            }
             parser.setErrorHandler(new ErrorHandlerRI());
-            parser.parse(xmlFile);
-            document = parser.getDocument();
+            document = parser.parse(xmlFile);
             Element rootElement = document.getDocumentElement();
             /* print out the elements */
             if (_trace)
@@ -245,24 +248,26 @@ public class Factory implements java.io.Serializable {
         String classname,
         InputSource source,
         boolean validate) {
-        DOMParser parser = new DOMParser();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             if (validate) {
-                parser.setEntityResolver(new EntityResolverRI());
-                parser.setFeature(
+                factory.setFeature(
                     "http://xml.org/sax/features/validation",
                     true);
             } else
-                parser.setFeature(
+                factory.setFeature(
                     "http://apache.org/xml/features/nonvalidating/load-external-dtd",
                     false);
-            parser.setFeature(
+            factory.setFeature(
                 "http://apache.org/xml/features/validation/schema",
                 true);
             // parser.setFeature("http://xml.org/sax/features/namespaces",true);
+            DocumentBuilder parser = factory.newDocumentBuilder();
+            if (validate) {
+                parser.setEntityResolver(new EntityResolverRI());
+            }
             parser.setErrorHandler(new ErrorHandlerRI());
-            parser.parse(source);
-            document = parser.getDocument();
+            document = factory.newDocumentBuilder().parse(source);
             Element rootElement = document.getDocumentElement();
 
             /* print out the elements */
@@ -363,7 +368,14 @@ public class Factory implements java.io.Serializable {
     private Object createRootDOMHelper(
         String classname,
         String rootElementName) {
-        document = new DocumentImpl();
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            document = dbf.newDocumentBuilder().newDocument();
+        } catch (ParserConfigurationException e) {
+            System.out.println("Exception: Factory::createRootDOMHelper() " + e);
+            e.printStackTrace();
+            return null;
+        }
         this.rootElementName = rootElementName;
 
         Element childElement = document.createElement(rootElementName);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+    Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
     Copyright (c) 2018 Payara Services Ltd. and/or its affiliates.
     
     This program and the accompanying materials are made available under the
@@ -45,7 +46,6 @@
         <rpc.api.version>1.1.3</rpc.api.version>
         <soap.api.version>1.4.1</soap.api.version>
         <saaj.version>1.5.1</saaj.version>
-        <xerces.version>2.6.2-jaxb-1.0.6</xerces.version>
         <fastInfoset.version>1.2.16</fastInfoset.version>
         <ant.version>1.9.13</ant.version>
 
@@ -64,8 +64,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>jakarta.mail</groupId>
-                <artifactId>jakarta.mail-api</artifactId>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>jakarta.mail</artifactId>
                 <version>${mail.api.version}</version>
             </dependency>
             <dependency>
@@ -82,6 +82,12 @@
                 <groupId>com.sun.xml.messaging.saaj</groupId>
                 <artifactId>saaj-impl</artifactId>
                 <version>${saaj.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jakarta.activation</groupId>
+                        <artifactId>jakarta.activation-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.sun.xml.fastinfoset</groupId>
@@ -92,11 +98,6 @@
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
                 <version>${ant.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>${xerces.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -112,7 +113,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>3.8.1</version>
                     <configuration>
                         <compile>1.8</compile>
                         <target>1.8</target>
@@ -121,35 +122,41 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.1</version>
                     <configuration>
+                        <notimestamp>true</notimestamp>
                         <additionalOptions>-Xdoclint:none</additionalOptions>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0-M3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.5.1</version>
+                    <version>4.2.1</version>
+                        <configuration>
+                            <instructions>
+                                <_removeheaders>Bnd-LastModified,Build-Jdk,Built-By,Include-Resource</_removeheaders>
+                            </instructions>
+                        </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.5.5</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <tarLongFileMode>gnu</tarLongFileMode>
                     </configuration>
@@ -179,24 +186,6 @@
                                     <targetPath>META-INF</targetPath>
                                 </resource>
                             </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>osgi-bundle</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                        <configuration>
-                            <instructions>
-                                <_noee>true</_noee>
-                            </instructions>
                         </configuration>
                     </execution>
                 </executions>

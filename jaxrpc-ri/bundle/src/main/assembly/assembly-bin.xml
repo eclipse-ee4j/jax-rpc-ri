@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2019 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -31,27 +31,12 @@
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <outputDirectory>lib</outputDirectory>
             <unpack>false</unpack>
-            <excludes>
-                <exclude>${project.groupId}:*:*</exclude>
-            </excludes>
         </dependencySet>
     </dependencySets>
-    <moduleSets>
-        <moduleSet>
-            <useAllReactorProjects>true</useAllReactorProjects>
-            <excludes>
-                <exclude>${project.groupId}:jakarta.xml.rpc.samples.*:*</exclude>
-            </excludes>
-            <binaries>
-                <outputDirectory>lib</outputDirectory>
-                <unpack>false</unpack>
-            </binaries>
-        </moduleSet>
-    </moduleSets>
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/../..</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
             <includes>
                 <include>README*</include>
                 <include>LICENSE*</include>

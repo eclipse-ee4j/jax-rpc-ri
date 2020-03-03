@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
     Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
-    Copyright (c) 2018 Payara Services Ltd. and/or its affiliates.
+    Copyright (c) 2018-2020 Payara Services Ltd. and/or its affiliates.
     
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -47,6 +47,7 @@
         <soap.api.version>1.4.1</soap.api.version>
         <saaj.version>1.5.1</saaj.version>
         <fastInfoset.version>1.2.16</fastInfoset.version>
+        <saaj.api.version>1.4.2</saaj.api.version>
         <ant.version>1.9.13</ant.version>
 
         <legal.doc.source>${maven.multiModuleProjectDirectory}/..</legal.doc.source>
@@ -77,6 +78,11 @@
                 <groupId>jakarta.xml.rpc</groupId>
                 <artifactId>jakarta.xml.rpc-api</artifactId>
                 <version>${rpc.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.soap</groupId>
+                <artifactId>jakarta.xml.soap-api</artifactId>
+                <version>${saaj.api.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sun.xml.messaging.saaj</groupId>

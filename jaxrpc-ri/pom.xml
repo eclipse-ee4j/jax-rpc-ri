@@ -48,7 +48,7 @@
         <saaj.version>1.5.1</saaj.version>
         <fastInfoset.version>1.2.16</fastInfoset.version>
         <saaj.api.version>1.4.2</saaj.api.version>
-        <ant.version>1.9.13</ant.version>
+        <ant.version>1.9.15</ant.version>
 
         <legal.doc.source>${maven.multiModuleProjectDirectory}/..</legal.doc.source>
 

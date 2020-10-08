@@ -22,7 +22,6 @@ import java.io.InputStream;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.lang.reflect.Method;
 import java.util.Properties;
 
 import com.sun.xml.rpc.processor.ProcessorOptions;

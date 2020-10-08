@@ -17,9 +17,6 @@
 package com.sun.xml.rpc.streaming;
 
 import java.io.OutputStream;
-import javax.xml.stream.*;
-import com.sun.xml.fastinfoset.stax.*;
-import com.sun.xml.fastinfoset.vocab.*;
 
 /**
  * <p> A concrete factory for FI XMLWriter objects. </p>

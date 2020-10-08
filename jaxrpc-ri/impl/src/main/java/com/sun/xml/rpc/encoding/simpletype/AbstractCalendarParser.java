@@ -12,7 +12,6 @@ package com.sun.xml.rpc.encoding.simpletype;
 
 import com.sun.xml.rpc.encoding.simpletype.TimeZone;
 
-import java.math.BigInteger;
 import java.util.SimpleTimeZone;
 
 /**

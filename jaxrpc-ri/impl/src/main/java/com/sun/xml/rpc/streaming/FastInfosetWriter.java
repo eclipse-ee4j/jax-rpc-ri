@@ -16,9 +16,7 @@
 
 package com.sun.xml.rpc.streaming;
 
-import java.util.Iterator;
 import java.io.OutputStream;
-import java.io.IOException;
 import javax.xml.namespace.QName;
 import javax.xml.stream.*;
 

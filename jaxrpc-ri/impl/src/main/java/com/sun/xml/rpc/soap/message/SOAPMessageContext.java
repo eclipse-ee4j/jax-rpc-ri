@@ -34,7 +34,6 @@ import javax.xml.transform.stream.StreamSource;
 import com.sun.xml.messaging.saaj.util.ByteInputStream;
 import com.sun.xml.rpc.util.NullIterator;
 import com.sun.xml.rpc.util.xml.XmlUtil;
-import com.sun.xml.rpc.client.StubPropertyConstants;
 
 // Dependency with our SAAJ to support FI
 import com.sun.xml.messaging.saaj.soap.MessageImpl;

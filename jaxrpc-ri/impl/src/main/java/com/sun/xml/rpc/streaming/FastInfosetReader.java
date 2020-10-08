@@ -16,13 +16,10 @@
 
 package com.sun.xml.rpc.streaming;
 
-import java.util.Iterator;
 import java.io.InputStream;
 
 import javax.xml.stream.*;
 import javax.xml.namespace.QName;
-import org.xml.sax.InputSource;
-import org.xml.sax.helpers.AttributesImpl;
 
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
 

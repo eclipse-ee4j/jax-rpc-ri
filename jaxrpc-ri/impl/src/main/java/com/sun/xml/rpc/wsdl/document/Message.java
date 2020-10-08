@@ -29,7 +29,6 @@ import com.sun.xml.rpc.wsdl.framework.Entity;
 import com.sun.xml.rpc.wsdl.framework.EntityAction;
 import com.sun.xml.rpc.wsdl.framework.GlobalEntity;
 import com.sun.xml.rpc.wsdl.framework.Kind;
-import com.sun.xml.rpc.wsdl.framework.ValidationException;
 
 /**
  * Entity corresponding to the "message" WSDL element.

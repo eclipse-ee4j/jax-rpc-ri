@@ -16,7 +16,6 @@
 
 package com.sun.xml.rpc.processor.modeler.wsdl;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

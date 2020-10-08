@@ -19,7 +19,6 @@ package com.sun.xml.rpc.encoding.simpletype;
 import com.sun.xml.rpc.streaming.XMLReader;
 import com.sun.xml.rpc.streaming.XMLWriter;
 import com.sun.xml.rpc.streaming.FastInfosetWriter;
-import com.sun.xml.rpc.streaming.FastInfosetReader;
 import com.sun.xml.rpc.streaming.XmlTreeWriter;
 
 /**

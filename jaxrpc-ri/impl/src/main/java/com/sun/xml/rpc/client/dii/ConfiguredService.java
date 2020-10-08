@@ -33,7 +33,6 @@ import com.sun.xml.rpc.processor.modeler.ModelerException;
 import com.sun.xml.rpc.soap.SOAPConstantsFactory;
 import com.sun.xml.rpc.soap.SOAPEncodingConstants;
 import com.sun.xml.rpc.soap.SOAPVersion;
-import com.sun.xml.rpc.util.Holders;
 
 /**
  * @author JAX-RPC Development Team

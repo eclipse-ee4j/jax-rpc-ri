@@ -16,28 +16,7 @@
 
 package com.sun.xml.rpc.processor.modeler.rmi;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.xml.namespace.QName;
-
-import com.sun.xml.rpc.processor.generator.Names;
-import com.sun.xml.rpc.processor.model.Block;
-import com.sun.xml.rpc.processor.model.Fault;
-import com.sun.xml.rpc.processor.model.java.JavaException;
-import com.sun.xml.rpc.processor.model.java.JavaStructureMember;
 import com.sun.xml.rpc.processor.model.literal.LiteralElementMember;
-import com.sun.xml.rpc.processor.model.literal.LiteralSequenceType;
-import com.sun.xml.rpc.processor.model.literal.LiteralType;
-import com.sun.xml.rpc.processor.util.StringUtils;
 
 /**
  *

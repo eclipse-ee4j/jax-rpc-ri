@@ -18,14 +18,8 @@ package com.sun.xml.rpc.processor.modeler.rmi;
 
 import java.util.Map;
 
-import com.sun.xml.rpc.processor.model.soap.SOAPAnyType;
-import com.sun.xml.rpc.processor.model.soap.SOAPSimpleType;
-import com.sun.xml.rpc.soap.SOAPConstantsFactory;
 import com.sun.xml.rpc.soap.SOAPVersion;
-import com.sun.xml.rpc.soap.SOAPWSDLConstants;
 import com.sun.xml.rpc.util.VersionUtil;
-import com.sun.xml.rpc.wsdl.document.schema.BuiltInTypes;
-import com.sun.xml.rpc.wsdl.document.schema.SchemaConstants;
 
 /**
  * @author JAX-RPC Development Team

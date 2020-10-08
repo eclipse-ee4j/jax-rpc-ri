@@ -19,7 +19,6 @@ package com.sun.xml.rpc.server;
 import com.sun.xml.rpc.soap.message.InternalSOAPMessage;
 import com.sun.xml.rpc.soap.message.SOAPMessageContext;
 
-import com.sun.xml.rpc.client.StubPropertyConstants;
 
 /**
  * The internal state of an otherwise stateless StreamingHandler. 

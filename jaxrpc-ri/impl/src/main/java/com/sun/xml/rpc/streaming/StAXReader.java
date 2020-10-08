@@ -21,7 +21,6 @@ import org.xml.sax.InputSource;
 import java.io.StringReader;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -32,7 +31,6 @@ import javax.xml.transform.Source;
 
 import com.sun.xml.rpc.sp.NamespaceSupport;
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
-import com.sun.xml.rpc.util.xml.CDATA;
 
 // needed for stax workaround for bug 5045462
 import javax.xml.transform.Transformer;

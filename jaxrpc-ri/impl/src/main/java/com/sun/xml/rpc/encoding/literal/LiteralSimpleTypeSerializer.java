@@ -34,7 +34,6 @@ import com.sun.xml.rpc.util.exception.JAXRPCExceptionBase;
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
 
 import com.sun.xml.rpc.streaming.FastInfosetReader;
-import com.sun.xml.rpc.encoding.simpletype.XSDBase64BinaryEncoder;
 
 /**
  *

@@ -16,7 +16,6 @@
 
 package com.sun.xml.rpc.server.http;
 
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

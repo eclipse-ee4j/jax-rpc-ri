@@ -50,10 +50,6 @@ import com.sun.xml.rpc.util.exception.JAXRPCExceptionBase;
 import com.sun.xml.rpc.util.localization.Localizable;
 import com.sun.xml.rpc.util.localization.LocalizableMessageFactory;
 import com.sun.xml.rpc.util.localization.Localizer;
-import com.sun.xml.rpc.client.StubPropertyConstants;
-
-// Dependency with our SAAJ impl for FI
-import com.sun.xml.messaging.saaj.soap.MessageImpl;
 
 /**
  * @author JAX-RPC Development Team

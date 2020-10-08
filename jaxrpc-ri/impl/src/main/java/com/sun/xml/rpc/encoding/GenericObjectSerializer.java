@@ -29,7 +29,6 @@ import com.sun.xml.rpc.streaming.XMLReader;
 import com.sun.xml.rpc.streaming.XMLWriter;
 import com.sun.xml.rpc.util.JAXRPCClassFactory;
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
-import com.sun.xml.rpc.encoding.literal.GenericLiteralObjectSerializer;
 
 /**
  * A data-driven (de)serializer.

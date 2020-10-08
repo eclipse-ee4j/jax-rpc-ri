@@ -69,7 +69,6 @@ import com.sun.xml.rpc.processor.util.ProcessorEnvironment;
 import com.sun.xml.rpc.processor.util.StringUtils;
 import com.sun.xml.rpc.soap.SOAPVersion;
 import com.sun.xml.rpc.util.ClassNameInfo;
-import com.sun.xml.rpc.util.VersionUtil;
 import com.sun.xml.rpc.util.exception.JAXRPCExceptionBase;
 import com.sun.xml.rpc.util.exception.LocalizableExceptionAdapter;
 import com.sun.xml.rpc.util.VersionUtil;

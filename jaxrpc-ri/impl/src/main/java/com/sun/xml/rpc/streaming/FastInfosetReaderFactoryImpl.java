@@ -19,8 +19,6 @@ package com.sun.xml.rpc.streaming;
 import java.io.InputStream;
 
 import org.xml.sax.InputSource;
-import javax.xml.stream.*;
-import com.sun.xml.fastinfoset.stax.*;
 
 /**
  * <p> A concrete factory for FI XMLReader objects. </p>

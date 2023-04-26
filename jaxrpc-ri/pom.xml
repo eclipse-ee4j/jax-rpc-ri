@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
-    Copyright (c) 2018-2020 Payara Services Ltd. and/or its affiliates.
+    Copyright (c) 2019, 2023 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2018, 2020 Payara Services Ltd. and/or its affiliates.
     
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -38,20 +38,20 @@
         <url>https://github.com/eclipse-ee4j/jax-rpc-ri</url>
     </scm>
 
-
     <properties>
-        <mail.api.version>1.6.3</mail.api.version>
-        <activation.api.version>1.2.1</activation.api.version>
-        <servlet.api.version>4.0.2</servlet.api.version>
-        <rpc.api.version>1.1.3</rpc.api.version>
+        <mail.api.version>1.6.7</mail.api.version>
+        <activation.api.version>1.2.2</activation.api.version>
+        <servlet.api.version>4.0.4</servlet.api.version>
+        <rpc.api.version>1.1.4</rpc.api.version>
         <soap.api.version>1.4.1</soap.api.version>
-        <saaj.version>1.5.1</saaj.version>
-        <fastInfoset.version>1.2.16</fastInfoset.version>
+        <saaj.version>1.5.3</saaj.version>
+        <fastInfoset.version>1.2.18</fastInfoset.version>
         <saaj.api.version>1.4.2</saaj.api.version>
-        <ant.version>1.9.13</ant.version>
+        <ant.version>1.10.13</ant.version>
 
         <legal.doc.source>${maven.multiModuleProjectDirectory}/..</legal.doc.source>
-
+        <maven.compiler.release>8</maven.compiler.release>
+        <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
     </properties>
 
     <modules>
@@ -114,26 +114,22 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                    <configuration>
-                        <compile>1.8</compile>
-                        <target>1.8</target>
-                    </configuration>
+                    <version>3.11.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.5.0</version>
                     <configuration>
                         <notimestamp>true</notimestamp>
                         <additionalOptions>-Xdoclint:none</additionalOptions>
@@ -142,35 +138,114 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>4.2.1</version>
-                        <configuration>
-                            <instructions>
-                                <_removeheaders>Bnd-LastModified,Build-Jdk,Built-By,Include-Resource</_removeheaders>
-                            </instructions>
-                        </configuration>
+                    <version>5.1.8</version>
+                    <configuration>
+                        <instructions>
+                            <_removeheaders>Bnd-LastModified,Build-Jdk,Built-By,Include-Resource</_removeheaders>
+                        </instructions>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.5.0</version>
                     <configuration>
                         <tarLongFileMode>gnu</tarLongFileMode>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.15.0</version>
+                    <configuration>
+                        <ruleSet>
+                            <rules>
+                                <rule>
+                                    <groupId>com.sun.mail</groupId>
+                                    <ignoreVersions>
+                                        <ignoreVersion>
+                                            <type>regex</type>
+                                            <version>[2-9]+.*</version>
+                                        </ignoreVersion>
+                                    </ignoreVersions>
+                                </rule>
+                                <rule>
+                                    <groupId>jakarta.servlet</groupId>
+                                    <ignoreVersions>
+                                        <ignoreVersion>
+                                            <type>regex</type>
+                                            <version>[5-9]+.*</version>
+                                        </ignoreVersion>
+                                    </ignoreVersions>
+                                </rule>
+                                <rule>
+                                    <groupId>jakarta.xml.soap</groupId>
+                                    <ignoreVersions>
+                                        <ignoreVersion>
+                                            <type>regex</type>
+                                            <version>[2-9]+.*</version>
+                                        </ignoreVersion>
+                                    </ignoreVersions>
+                                </rule>
+                                <rule>
+                                    <groupId>com.sun.xml.messaging.saaj</groupId>
+                                    <ignoreVersions>
+                                        <ignoreVersion>
+                                            <type>regex</type>
+                                            <version>[2-9]+.*</version>
+                                        </ignoreVersion>
+                                    </ignoreVersions>
+                                </rule>
+                                <rule>
+                                    <groupId>com.sun.xml.fastinfoset</groupId>
+                                    <ignoreVersions>
+                                        <ignoreVersion>
+                                            <type>regex</type>
+                                            <version>[2-9]+.*</version>
+                                        </ignoreVersion>
+                                    </ignoreVersions>
+                                </rule>
+                            </rules>
+                        </ruleSet>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <requireJavaVersion>
+                            <version>[11,)</version>
+                            <message>The build requires Java SE 11 or newer.</message>
+                        </requireJavaVersion>
+                        <requireMavenVersion>
+                            <version>[3.6.0,)</version>
+                        </requireMavenVersion>
+                    </rules>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>

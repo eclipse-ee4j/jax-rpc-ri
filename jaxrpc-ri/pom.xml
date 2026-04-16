@@ -39,7 +39,7 @@
     </scm>
 
     <properties>
-        <mail.api.version>1.6.7</mail.api.version>
+        <mail.api.version>1.6.8</mail.api.version>
         <activation.api.version>1.2.2</activation.api.version>
         <servlet.api.version>4.0.4</servlet.api.version>
         <rpc.api.version>1.1.4</rpc.api.version>
